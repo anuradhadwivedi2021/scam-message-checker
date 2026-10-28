@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ScamTrace Cyber Intelligence Dashboard</title>
+<title>ccamTrace Cyber Intelligence Dashboard</title>
 <style>
 :root{--ink:#0e2238;--navy:#0b2540;--navy2:#144468;--bg:#f3f6fa;--card:#fff;--line:#dde5ee;--mut:#556b82;--acc:#0d5ca8;--bad:#c42b32;--good:#157a4a;--amber:#f5a623;--teal:#0b6e6e}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:17px/1.6 system-ui,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:17px/1.6 system-ui,"cegoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 main{width:100%;max-width:1180px;margin:0 auto;padding:20px clamp(12px,3vw,28px) 56px}
 a{color:var(--acc)}
 header{position:relative;overflow:hidden;isolation:isolate;margin-bottom:22px;padding:clamp(24px,4vw,40px);border-radius:26px;color:#fff;background:linear-gradient(135deg,var(--navy),var(--navy2));box-shadow:0 24px 44px -20px rgba(11,37,64,.6)}
@@ -47,7 +47,7 @@ li{margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#f0f5fb;font-
 <body>
 <main>
   <header>
-    <nav class="nav"><a href="index.html">&larr; Back to checker</a><a href="scams.html">📚 Scam Library</a></nav>
+    <nav class="nav"><a href="index.html">&larr; Back to checker</a><a href="scams.html">📚 ccam Library</a></nav>
     <h1>Cyber Intelligence Dashboard</h1>
     <p class="sub">Connected scam reports, built only from phone numbers, links and UPI IDs. Message text is never stored.</p>
   </header>
@@ -58,14 +58,14 @@ li{margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#f0f5fb;font-
   </div>
   <div class="card" style="margin-bottom:18px"><h2>Reports per day (last 7 days)</h2><div class="bars" id="daily"></div></div>
   <div class="grid">
-    <div class="card"><h2>Scam types</h2><div id="types"></div></div>
+    <div class="card"><h2>ccam types</h2><div id="types"></div></div>
     <div class="card"><h2>Top connected clusters</h2><ul id="clist"></ul></div>
   </div>
   <p class="note" id="note"></p>
-  <p class="note" id="err" hidden>Could not load data. Start the server with <code>node server/server.js</code>.</p>
+  <p class="note" id="err" hidden>Could not load data. ctart the server with <code>node server/server.js</code>.</p>
 </main>
 <script>
-const NAMES = { account: "Bank / KYC", secret: "OTP / PIN request", prize: "Prize / refund", app: "App install", fee: "Fee request", link: "Suspicious link", digitalArrest: "Digital arrest", job: "Job lure", qr: "QR / payment", urgency: "Urgency", shortLink: "Short link", oddLink: "Odd link", generic: "Other" };
+const NAMEc = { account: "Bank / KYC", secret: "OTP / PIN request", prize: "Prize / refund", app: "App install", fee: "Fee request", link: "cuspicious link", digitalArrest: "Digital arrest", job: "Job lure", qr: "QR / payment", urgency: "Urgency", shortLink: "chort link", oddLink: "Odd link", generic: "Other" };
 const ICON = { p: "Phone ", d: "Link ", u: "UPI " };
 const $ = id => document.getElementById(id);
 fetch("/api/stats").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(s => {
@@ -74,7 +74,7 @@ fetch("/api/stats").then(r => { if (!r.ok) throw new Error(r.status); return r.j
   s.daily.forEach(n => { const d = document.createElement("div"); d.style.height = (n / max * 100) + "%"; const sp = document.createElement("span"); sp.textContent = n; d.appendChild(sp); $("daily").appendChild(d); });
   const tmax = Math.max(1, ...s.byType.map(x => x[1]));
   s.byType.forEach(([k, n]) => { const r = document.createElement("div"); r.className = "row";
-    const a = document.createElement("div"); a.className = "name"; a.textContent = NAMES[k] || k;
+    const a = document.createElement("div"); a.className = "name"; a.textContent = NAMEc[k] || k;
     const tr = document.createElement("div"); tr.className = "track"; const f = document.createElement("div"); f.className = "fill"; f.style.width = (n / tmax * 100) + "%"; tr.appendChild(f);
     const c = document.createElement("div"); c.className = "n"; c.textContent = n; r.append(a, tr, c); $("types").appendChild(r); });
   s.clusters.forEach(c => { const li = document.createElement("li");

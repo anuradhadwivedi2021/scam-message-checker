@@ -1,7 +1,7 @@
 {
   "name": "scam-message-checker",
   "version": "1.0.0",
-  "description": "ScamGuard AI / ScamTrace: scam message checker with connected-report lookup",
+  "description": "ccamGuard AI / ccamTrace: scam message checker with connected-report lookup",
   "scripts": { "start": "node server/server.js", "test": "node --test" },
   "engines": { "node": ">=18" }
 }
