@@ -89,7 +89,7 @@ textarea:focus{outline:2px solid var(--teal);border-color:transparent}
   </a>
   <div class="links"><a href="#how">How It Works</a><a href="scams.html">Scam Types</a><a href="tips.html">Safety Centre</a><a href="dashboard.html">Dashboard</a><a href="#faq">FAQ</a></div>
   <div class="navr">
-    <select aria-label="Language"><option>🌐 English</option><option>हिन्दी</option><option>मराठी</option></select>
+    <select id="lang" aria-label="Language"><option value="en">🌐 English</option><option value="hi">🌐 हिन्दी</option><option value="mr">🌐 मराठी</option></select>
     <a class="btn sm" href="index.html">Check Message →</a>
   </div>
 </nav>
@@ -155,6 +155,84 @@ const rules=[
  [/registration fee|pay.*fee|transfer|send money|upi/i,'Asks you to pay or transfer money first.'],
  [/urgent|today|immediately|now|limited/i,'Creates urgency so you do not think.']
 ];
+const D={
+"Your Digital Safety Assistant":["आपका डिजिटल सुरक्षा सहायक","तुमचा डिजिटल सुरक्षा सहाय्यक"],
+"How It Works":["यह कैसे काम करता है","हे कसे काम करते"],
+"Scam Types":["स्कैम के प्रकार","स्कॅमचे प्रकार"],
+"Safety Centre":["सुरक्षा केंद्र","सुरक्षा केंद्र"],
+"Dashboard":["डैशबोर्ड","डॅशबोर्ड"],
+"FAQ":["सामान्य प्रश्न","वारंवार प्रश्न"],
+"Check Message →":["संदेश जांचें →","संदेश तपासा →"],
+"🛡️ FREE SCAM MESSAGE CHECKER":["🛡️ मुफ़्त स्कैम संदेश जांच","🛡️ मोफत स्कॅम संदेश तपासणी"],
+"Think Before":["भरोसा करने से","विश्वास ठेवण्यापूर्वी"],
+"You":["पहले","विचार"],
+"Trust.":["सोचें।","करा."],
+"Not sure if a message is a scam? Check it before you act.":["पक्का नहीं कि संदेश स्कैम है? कुछ करने से पहले जांच लें।","संदेश स्कॅम आहे का याची खात्री नाही? कृती करण्यापूर्वी तपासा."],
+"Check suspicious SMS, WhatsApp messages, emails or payment requests for common scam warning signs, understand why they may be risky, and learn what to do next.":["संदिग्ध SMS, WhatsApp संदेश, ईमेल या पेमेंट अनुरोध में स्कैम के आम चेतावनी संकेत जांचें, जानें कि वे जोखिम भरे क्यों हो सकते हैं, और आगे क्या करना है।","संशयास्पद SMS, WhatsApp संदेश, ईमेल किंवा पेमेंट विनंतीमधील स्कॅमची सामान्य धोक्याची चिन्हे तपासा, ते धोकादायक का असू शकतात ते समजून घ्या आणि पुढे काय करायचे ते जाणून घ्या."],
+"Understand suspicious patterns":["संदिग्ध पैटर्न समझें","संशयास्पद पॅटर्न समजून घ्या"],
+"Detect common scam tactics and red flags.":["स्कैम की आम चालें और खतरे के संकेत पहचानें।","स्कॅमच्या सामान्य युक्त्या आणि धोक्याची चिन्हे ओळखा."],
+"See why a message was flagged":["देखें संदेश क्यों चिह्नित हुआ","संदेश का चिन्हांकित झाला ते पहा"],
+"Get clear, easy-to-understand explanations.":["साफ़ और आसान भाषा में स्पष्टीकरण पाएं।","स्पष्ट आणि सोप्या भाषेत स्पष्टीकरण मिळवा."],
+"Get practical next steps to stay safe":["सुरक्षित रहने के व्यावहारिक कदम पाएं","सुरक्षित राहण्यासाठी पुढील व्यावहारिक पावले मिळवा"],
+"Follow simple guidance to protect yourself.":["खुद को बचाने के लिए सरल मार्गदर्शन अपनाएं।","स्वतःचे संरक्षण करण्यासाठी सोपे मार्गदर्शन पाळा."],
+"🔍 Check Message →":["🔍 संदेश जांचें →","🔍 संदेश तपासा →"],
+"📖 Learn How to Stay Safe":["📖 सुरक्षित रहना सीखें","📖 सुरक्षित कसे राहायचे ते शिका"],
+"🔒 No signup required":["🔒 साइनअप की ज़रूरत नहीं","🔒 साइनअप आवश्यक नाही"],
+"⚡ Quick and easy to use":["⚡ तेज़ और आसान","⚡ जलद आणि सोपे"],
+"🛡️ Safety-first guidance":["🛡️ सुरक्षा-प्रथम मार्गदर्शन","🛡️ सुरक्षा-प्रथम मार्गदर्शन"],
+"Check a suspicious message":["संदिग्ध संदेश जांचें","संशयास्पद संदेश तपासा"],
+"Paste the message you received to check for common scam warning signs.":["जो संदेश मिला उसे पेस्ट करें और स्कैम के आम संकेत जांचें।","मिळालेला संदेश पेस्ट करा आणि स्कॅमची सामान्य चिन्हे तपासा."],
+"📋 Paste from clipboard":["📋 क्लिपबोर्ड से पेस्ट करें","📋 क्लिपबोर्डवरून पेस्ट करा"],
+"🗑️ Clear text":["🗑️ टेक्स्ट साफ़ करें","🗑️ मजकूर पुसा"],
+"🛑 Never enter passwords, OTPs, banking PINs or other sensitive credentials.":["🛑 पासवर्ड, OTP, बैंकिंग PIN या अन्य संवेदनशील जानकारी कभी न डालें।","🛑 पासवर्ड, OTP, बँकिंग PIN किंवा इतर संवेदनशील माहिती कधीही टाकू नका."],
+"Try an example message":["एक उदाहरण संदेश आज़माएं","एक उदाहरण संदेश वापरून पहा"],
+"Digital Arrest":["डिजिटल अरेस्ट","डिजिटल अरेस्ट"],
+"“Your Aadhaar is linked to a criminal case…”":["“आपका आधार एक आपराधिक मामले से जुड़ा है…”","“तुमचा आधार एका गुन्ह्याशी जोडला आहे…”"],
+"Bank KYC":["बैंक KYC","बँक KYC"],
+"“Your account will be blocked today…”":["“आपका खाता आज ब्लॉक हो जाएगा…”","“तुमचे खाते आज ब्लॉक होईल…”"],
+"Fake Job Offer":["फ़र्ज़ी नौकरी ऑफ़र","बनावट नोकरी ऑफर"],
+"“Earn ₹5,000 daily from home…”":["“घर बैठे रोज़ ₹5,000 कमाएं…”","“घरबसल्या रोज ₹5,000 कमवा…”"],
+"🌐 Supports English, Hindi, Marathi and mixed-language messages, where available.":["🌐 अंग्रेज़ी, हिंदी, मराठी और मिश्रित भाषा के संदेशों को सपोर्ट करता है।","🌐 इंग्रजी, हिंदी, मराठी आणि मिश्र भाषेतील संदेशांना सपोर्ट करते."],
+"Cybercrime Helpline":["साइबर क्राइम हेल्पलाइन","सायबर क्राइम हेल्पलाइन"],
+"Contact immediately if you have lost money to a cyber scam.":["साइबर स्कैम में पैसे गंवाए हों तो तुरंत संपर्क करें।","सायबर स्कॅममध्ये पैसे गेले असतील तर लगेच संपर्क करा."],
+"Report Online":["ऑनलाइन रिपोर्ट करें","ऑनलाइन तक्रार करा"],
+"National Cyber Crime Reporting Portal ↗":["राष्ट्रीय साइबर अपराध रिपोर्टिंग पोर्टल ↗","राष्ट्रीय सायबर गुन्हे तक्रार पोर्टल ↗"],
+"Stay Informed":["जानकार रहें","माहितीत रहा"],
+"Learn about common scams and safety tips.":["आम स्कैम और सुरक्षा के सुझाव जानें।","सामान्य स्कॅम आणि सुरक्षा टिप्स जाणून घ्या."],
+"Clear Explanations":["स्पष्ट व्याख्या","स्पष्ट स्पष्टीकरण"],
+"Understand the warning signs in simple language.":["चेतावनी के संकेत सरल भाषा में समझें।","धोक्याची चिन्हे सोप्या भाषेत समजून घ्या."],
+"Multiple Scam Categories":["कई स्कैम श्रेणियां","अनेक स्कॅम श्रेणी"],
+"Check common fraud patterns from real-world scenarios.":["असली घटनाओं पर आधारित आम धोखाधड़ी के पैटर्न जांचें।","प्रत्यक्ष घटनांवर आधारित सामान्य फसवणुकीचे पॅटर्न तपासा."],
+"Multilingual Experience":["बहुभाषी अनुभव","बहुभाषिक अनुभव"],
+"Use in English, Hindi, Marathi and mixed languages.":["अंग्रेज़ी, हिंदी, मराठी और मिश्रित भाषाओं में इस्तेमाल करें।","इंग्रजी, हिंदी, मराठी आणि मिश्र भाषांमध्ये वापरा."],
+"Practical Safety Guidance":["व्यावहारिक सुरक्षा मार्गदर्शन","व्यावहारिक सुरक्षा मार्गदर्शन"],
+"Learn what to do next and stay safer online.":["जानें आगे क्या करना है और ऑनलाइन सुरक्षित रहें।","पुढे काय करायचे ते जाणून घ्या आणि ऑनलाइन सुरक्षित रहा."],
+"Paste an SMS, WhatsApp message, email or payment request here…":["यहां SMS, WhatsApp संदेश, ईमेल या पेमेंट अनुरोध पेस्ट करें…","येथे SMS, WhatsApp संदेश, ईमेल किंवा पेमेंट विनंती पेस्ट करा…"],
+"Asks for OTP, PIN or password – real banks never do.":["OTP, PIN या पासवर्ड मांगता है – असली बैंक कभी नहीं मांगते।","OTP, PIN किंवा पासवर्ड मागतो – खऱ्या बँका कधीच मागत नाहीत."],
+"Threatens to block your account to create panic.":["घबराहट पैदा करने के लिए खाता ब्लॉक करने की धमकी देता है।","भीती निर्माण करण्यासाठी खाते ब्लॉक करण्याची धमकी देतो."],
+"Claims to be police or an agency – “digital arrest” does not exist.":["पुलिस या एजेंसी होने का दावा करता है – “डिजिटल अरेस्ट” जैसी कोई चीज़ नहीं होती।","पोलीस किंवा एजन्सी असल्याचा दावा करतो – “डिजिटल अरेस्ट” असे काही नसते."],
+"Contains a link – do not tap unknown links.":["इसमें लिंक है – अनजान लिंक पर क्लिक न करें।","यात लिंक आहे – अनोळखी लिंकवर क्लिक करू नका."],
+"Promises money or prizes you did not ask for.":["ऐसे पैसे या इनाम का वादा करता है जो आपने मांगा नहीं।","तुम्ही न मागितलेले पैसे किंवा बक्षीस देण्याचे आश्वासन देतो."],
+"Asks you to pay or transfer money first.":["पहले पैसे देने या ट्रांसफ़र करने को कहता है।","आधी पैसे भरण्यास किंवा ट्रान्सफर करण्यास सांगतो."],
+"Creates urgency so you do not think.":["जल्दबाज़ी पैदा करता है ताकि आप सोच न सकें।","घाई निर्माण करतो जेणेकरून तुम्ही विचार करू नये."],
+"High risk – likely a scam":["उच्च जोखिम – स्कैम होने की संभावना","उच्च धोका – स्कॅम असण्याची शक्यता"],
+"Suspicious – be careful":["संदिग्ध – सावधान रहें","संशयास्पद – सावध रहा"],
+"No common warning signs found":["कोई आम चेतावनी संकेत नहीं मिला","सामान्य धोक्याची चिन्हे आढळली नाहीत"],
+"Next:":["आगे:","पुढे:"],
+"don’t reply or click. If you lost money, call 1930 right away.":["जवाब न दें और क्लिक न करें। पैसे गए हों तो तुरंत 1930 पर कॉल करें।","उत्तर देऊ नका आणि क्लिक करू नका. पैसे गेले असतील तर लगेच 1930 वर कॉल करा."],
+"Still verify with the sender through an official channel.":["फिर भी भेजने वाले से आधिकारिक माध्यम से पुष्टि करें।","तरीही पाठवणाऱ्याकडून अधिकृत मार्गाने खात्री करा."]
+};
+let L='en';try{L=localStorage.getItem('sgLang')||'en'}catch(e){}
+const IX={en:-1,hi:0,mr:1},orig=new WeakMap(),origPh=new WeakMap();
+const tr=s=>IX[L]<0?s:(D[s]?D[s][IX[L]]:s);
+function applyLang(){
+  document.documentElement.lang=L;
+  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest('script,style,select,#result')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  let n;while(n=w.nextNode()){const t=n.nodeValue.trim();if(!t)continue;if(!orig.has(n))orig.set(n,t);const o=orig.get(n);n.nodeValue=n.nodeValue.replace(t,tr(o))}
+  const m=$('msg');if(!origPh.has(m))origPh.set(m,m.placeholder);m.placeholder=tr(origPh.get(m));
+  if($('result').classList.contains('show'))$('go').click();
+}
+
 const upd=()=>$('count').textContent=msg.value.length+'/2000';
 msg.oninput=upd;
 $('clear').onclick=()=>{msg.value='';upd();$('result').className=''};
@@ -163,11 +241,13 @@ document.querySelectorAll('.ex button').forEach(b=>b.onclick=()=>{msg.value=b.da
 $('go').onclick=()=>{
   const t=msg.value.trim(),r=$('result');
   if(!t){msg.focus();return}
-  const hits=rules.filter(x=>x[0].test(t)).map(x=>x[1]);
-  const lvl=hits.length>=3?['High risk – likely a scam','var(--redSoft)','var(--red)']:hits.length?['Suspicious – be careful','var(--blueSoft)','var(--blue)']:['No common warning signs found','var(--tealSoft)','var(--teal)'];
+  const hits=rules.filter(x=>x[0].test(t)).map(x=>tr(x[1]));
+  const lvl=hits.length>=3?[tr('High risk – likely a scam'),'var(--redSoft)','var(--red)']:hits.length?[tr('Suspicious – be careful'),'var(--blueSoft)','var(--blue)']:[tr('No common warning signs found'),'var(--tealSoft)','var(--teal)'];
   r.className='show';r.style.background=lvl[1];r.style.borderColor=lvl[2];
-  r.innerHTML='<h3>'+lvl[0]+'</h3>'+(hits.length?'<ul>'+hits.map(h=>'<li>'+h+'</li>').join('')+'</ul><p style="margin:10px 0 0;font-size:.9rem"><b>Next:</b> don’t reply or click. If you lost money, call <b>1930</b> right away.</p>':'<p style="margin:0;font-size:.9rem">Still verify with the sender through an official channel.</p>');
+  r.innerHTML='<h3>'+lvl[0]+'</h3>'+(hits.length?'<ul>'+hits.map(h=>'<li>'+h+'</li>').join('')+'</ul><p style="margin:10px 0 0;font-size:.9rem"><b>'+tr('Next:')+'</b> '+tr('don’t reply or click. If you lost money, call 1930 right away.')+'</p>':'<p style="margin:0;font-size:.9rem">'+tr('Still verify with the sender through an official channel.')+'</p>');
 };
+$('lang').value=L;$('lang').onchange=e=>{L=e.target.value;try{localStorage.setItem('sgLang',L)}catch(x){}applyLang()};
+if(L!=='en')applyLang();
 </script>
 </body>
 </html>
