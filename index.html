@@ -112,6 +112,7 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
   .panel{padding:18px;border-radius:18px}
   .row .btn,.row select{flex:1 1 100%}
 }
+body.big{font-size:21px}
 @media (min-width:1100px){
   main{max-width:1180px}
   header{padding:40px 44px}
@@ -152,6 +153,7 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
       <a class="briefing-btn" href="dashboard.html">📊 Dashboard</a>
       <a class="briefing-btn" href="scams.html">📚 Scam Library</a>
       <button class="briefing-btn" id="openBriefing">📋 SDLC Pitch Briefing</button>
+      <button class="briefing-btn" id="bigText" aria-pressed="false" title="Larger text">A+</button>
     </div>
     <div class="lang" role="group" aria-label="Language">
       <button data-lang="en" aria-pressed="true">EN</button>
@@ -193,7 +195,13 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
       <h3 data-i18n="emergTitle"></h3>
       <p style="margin:0 0 8px;font-size:0.95rem;" data-i18n="emergDesc"></p>
       <a href="tel:1930" class="btn-emergency" id="helplineBtn">📞 Call Cybercrime Helpline (1930)</a>
+      <p class="small-note"><a href="https://sancharsaathi.gov.in/" target="_blank" rel="noopener" data-i18n="chakshu"></a></p>
     </div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn alt" id="shareBtn" data-i18n="shareBtn"></button>
+      <button class="btn alt" id="copyBtn" data-i18n="copyBtn"></button>
+    </div>
+    <p class="small-note" id="actMsg" aria-live="polite"></p>
   </div>
   <div class="panel">
     <details>
@@ -260,6 +268,9 @@ const T = {
     aiButton: "Generate AI Summary", aiNeedKey: "Please paste your Gemini API key above.",
     aiLoading: "Analyzing message with Gemini AI…", aiFail: "AI service unavailable. Offline rule engine verdict above remains active.",
     disclaimer: "Disclaimer: ScamGuard AI uses heuristic rules to identify known scam patterns. It does not guarantee 100% scam detection. Never share credentials. Always verify with your bank using the phone number printed on your debit card.",
+    shareBtn: "💬 Share with family (WhatsApp)", copyBtn: "📋 Copy result", copied: "Result copied.", copyFail: "Could not copy. Please select the text and copy it manually.",
+    chakshu: "Report this number or link on Sanchar Saathi (Chakshu)",
+    shareMsg: "I got a message I am not sure about. ScamTrace AI says: {v}. Please help me check it before I click or share anything.",
     empty: "Please paste or select a message to analyze.",
     verdict: { scam: "POTENTIAL SCAM: High Risk Detected", suspicious: "SUSPICIOUS: Exercise Caution", safe: "NO OBVIOUS WARNING SIGNS" },
     stamp: { scam: "SCAM", suspicious: "RISK", safe: "SAFE" },
@@ -343,6 +354,9 @@ const T = {
     aiButton: "AI विवरण प्राप्त करें", aiNeedKey: "पहले ऊपर अपनी Gemini API key डालें।",
     aiLoading: "Gemini AI विश्लेषण कर रहा है…", aiFail: "AI उपलब्ध नहीं है। ऊपर दिया गया ऑफ़लाइन नियम परिणाम पूरी तरह सक्रिय है।",
     disclaimer: "अस्वीकरण: स्कैमगार्ड AI पैटर्न नियमों पर काम करता है। यह 100% स्कैम पहचान की गारंटी नहीं देता। अनजान लिंक पर क्लिक न करें। हमेशा अपने बैंक कार्ड पर छपे नंबर पर ही संपर्क करें।",
+    shareBtn: "💬 परिवार को भेजें (WhatsApp)", copyBtn: "📋 नतीजा कॉपी करें", copied: "नतीजा कॉपी हो गया।", copyFail: "कॉपी नहीं हो सका। कृपया टेक्स्ट चुनकर खुद कॉपी करें।",
+    chakshu: "इस नंबर या लिंक की शिकायत संचार साथी (चक्षु) पर करें",
+    shareMsg: "मुझे एक मैसेज मिला है जिस पर मुझे शक है। ScamTrace AI का नतीजा: {v}। कृपया कुछ भी क्लिक या शेयर करने से पहले इसे जाँचने में मेरी मदद करें।",
     empty: "कृपया पहले कोई मैसेज पेस्ट करें या चुनें।",
     verdict: { scam: "संभावित स्कैम: उच्च जोखिम पाया गया", suspicious: "संदिग्ध: सावधान रहने की ज़रूरत है", safe: "कोई स्पष्ट चेतावनी संकेत नहीं" },
     stamp: { scam: "स्कैम", suspicious: "सावधान", safe: "सुरक्षित" },
@@ -426,6 +440,9 @@ const T = {
     aiButton: "AI विश्लेषण मिळवा", aiNeedKey: "आधी वर तुमची Gemini API key टाका.",
     aiLoading: "Gemini AI विचार करत आहे…", aiFail: "AI सध्या उपलब्ध नाही. वरील ऑफलाईन नियम निकाल चालू आहे.",
     disclaimer: "अस्वीकरण: हे टूल पॅटर्न नियमांवर कार्य करते. हे १००% स्कॅम ओळखण्याची हमी देत नाही. डेबिट कार्डवर छापलेल्या अधिकृत नंबरवरच संपर्क करा.",
+    shareBtn: "💬 कुटुंबाला पाठवा (WhatsApp)", copyBtn: "📋 निकाल कॉपी करा", copied: "निकाल कॉपी झाला.", copyFail: "कॉपी करता आले नाही. कृपया मजकूर निवडून स्वतः कॉपी करा.",
+    chakshu: "हा नंबर किंवा लिंक संचार साथी (चक्षु) वर रिपोर्ट करा",
+    shareMsg: "मला एक मेसेज आला आहे ज्याबद्दल मला शंका आहे. ScamTrace AI चा निकाल: {v}. काही क्लिक किंवा शेअर करण्याआधी कृपया तपासायला मदत करा.",
     empty: "कृपया आधी मेसेज पेस्ट करा किंवा निवडा.",
     verdict: { scam: "संभाव्य स्कॅम: उच्च धोका आढळला", suspicious: "संशयास्पद: सावध राहा", safe: "कोणतेही स्पष्ट धोक्याचे चिन्ह नाही" },
     stamp: { scam: "स्कॅम", suspicious: "सावध", safe: "सुरक्षित" },
@@ -729,6 +746,26 @@ document.querySelectorAll(".rec-btn").forEach(b => b.addEventListener("click", (
   renderRecovery();
 }));
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", renderRecovery));
+
+$("shareBtn").addEventListener("click", () => {
+  if (!last) return;
+  const t = T[lang];
+  const msg = t.shareMsg.replace("{v}", t.verdict[last.verdict]) + "\n\n" + last.text.slice(0, 500);
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank", "noopener");
+});
+$("copyBtn").addEventListener("click", async () => {
+  if (!last) return;
+  const t = T[lang], out = $("actMsg");
+  const lines = [t.verdict[last.verdict] + " (Score: " + last.score + ")"];
+  last.hits.forEach(id => lines.push("- " + t.flags[id]));
+  lines.push("", ...t.steps[last.verdict].map((x, i) => (i + 1) + ". " + x), "", "Message:", last.text);
+  try { await navigator.clipboard.writeText(lines.join("\n")); out.textContent = t.copied; }
+  catch (e) { out.textContent = t.copyFail; }
+});
+$("bigText").addEventListener("click", () => {
+  const on = document.body.classList.toggle("big");
+  $("bigText").setAttribute("aria-pressed", String(on));
+});
 
 applyStaticText();
 </script>
