@@ -8,7 +8,7 @@ const path = require('path');
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const a = html.indexOf('const T = {');
 const b = html.indexOf('const $ = id');
-const { analyze, SAMPLES, T } = new Function(html.slice(a, b) + '; return { analyze, SAMPLES, T };')();
+const { analyze, SAMPLES, T, extractEntities } = new Function(html.slice(a, b) + '; return { analyze, SAMPLES, T, extractEntities };')();
 
 // [expected verdict, name, message]
 const cases = [
@@ -89,4 +89,36 @@ test('recovery: every type mentions cybercrime.gov.in or 1930', () => {
   for (const l of LANGS) for (const t of TYPES) {
     assert.ok(T[l].recSteps[t].join(' ').match(/1930|cybercrime\.gov\.in/), `${l}.${t}`);
   }
+});
+
+// ---- Entity extraction (what gets sent to the server) ----
+const has = (list, t, v) => list.some(e => e.t === t && e.v === v);
+test('extract: phone from sample, link from sample, shortener keeps its path', () => {
+  assert.ok(has(extractEntities(SAMPLES[3]), 'p', '9812345678'));
+  assert.ok(has(extractEntities(SAMPLES[0]), 'd', 'examplebank-kyc-update.xyz'));
+  assert.ok(has(extractEntities(SAMPLES[1]), 'd', 'bit.ly/claim-prize-now'));
+  assert.ok(has(extractEntities(SAMPLES[7]), 'd', 'insure-offer.example.in'));
+});
+test('extract: +91 and spaced phone formats give the same number', () => {
+  assert.ok(has(extractEntities('call +91 98123 45678 now'), 'p', '9812345678'));
+  assert.ok(has(extractEntities('call 09812345678'), 'p', '9812345678'));
+});
+test('extract: UPI id found, and not mistaken for a link', () => {
+  const r = extractEntities('Pay to shop.link@ybl. Thanks');
+  assert.ok(has(r, 'u', 'shop.link@ybl'));
+  assert.ok(!r.some(e => e.t === 'd'));
+});
+test('extract: normal email, OTP, amounts and plain text give nothing', () => {
+  assert.deepStrictEqual(extractEntities('mail me at a@gmail.com'), []);
+  assert.deepStrictEqual(extractEntities('482913 is your OTP. Rs 25,00,000 and 4,999'), []);
+  assert.deepStrictEqual(extractEntities('hi, are you coming for dinner?'), []);
+});
+test('extract: at most 10 entities', () => {
+  const many = Array.from({ length: 15 }, (_, i) => `98765000${String(i).padStart(2, '0')}`).join(' ');
+  assert.strictEqual(extractEntities(many).length, 10);
+});
+test('linked-reports text exists in every language', () => {
+  for (const l of ['en', 'hi', 'mr']) for (const k of ['linkTitle', 'linkNote', 'linkNone', 'linkSummary', 'linkSeen', 'linkAlso', 'reportBtn', 'reportDone', 'reportErr'])
+    assert.ok(T[l][k] && T[l][k].length > 3, `${l}.${k}`);
+  for (const l of ['en', 'hi', 'mr']) assert.ok(T[l].linkSummary.includes('{n}') && T[l].linkSeen.includes('{n}'));
 });

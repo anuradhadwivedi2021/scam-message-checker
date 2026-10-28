@@ -82,6 +82,11 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
 .rec-steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem}
 .rec-note{font-weight:700;margin:14px 0 0}
 #result:not([hidden]){margin-bottom:18px}
+#result>:nth-child(6){grid-column:1/-1;animation-delay:.4s}
+.linked-list{list-style:none;padding:0;margin:8px 0 14px}
+.linked-list li{padding:8px 12px;border-radius:12px;background:#f0f5fb;margin-bottom:6px;word-break:break-all}
+.linked-list small{color:#556b82;margin-left:6px}
+.small-note{font-size:.9rem;color:#556b82;margin:12px 0 0}
 /* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(11,37,64,.62);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:999}
 .modal-content{background:#fff;border-radius:24px;max-width:680px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);animation:pop .3s ease both}
@@ -168,6 +173,12 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
       <div id="aiOut" aria-live="polite"></div>
     </details>
   </div>
+  <div class="panel" id="linkedPanel" hidden>
+    <h2 data-i18n="linkTitle"></h2>
+    <div id="linkedOut" aria-live="polite"></div>
+    <div class="row"><button class="btn alt" id="reportBtn" data-i18n="reportBtn"></button></div>
+    <p class="small-note" data-i18n="linkNote"></p>
+  </div>
 </section>
 
 <section class="panel" id="recovery">
@@ -251,6 +262,15 @@ const T = {
         "Do not pay anyone who promises to recover the money for a fee. That is a second scam."
       ],
     },
+    linkTitle: "Connected scam reports",
+    linkNote: "Only phone numbers, links and UPI IDs found in the message are sent to look up reports. The message text is never sent. Demo reports are simulated.",
+    linkNone: "No earlier reports match these details yet. You can be the first to report.",
+    linkSummary: "{n} earlier reports are linked to this message through shared details.",
+    linkSeen: "in {n} reports",
+    linkAlso: "Also connected to this scam:",
+    reportBtn: "Report this scam",
+    reportDone: "Thank you. Only the phone, link and UPI details were saved. Future checks will use them.",
+    reportErr: "Could not send the report. Try again later.",
     flags: {
       urgency: "High Pressure / Tight Deadline Urgency", account: "Threat to block Account, KYC, SIM, or Utility Connection",
       prize: "Unrealistic Prize, Cashback, or Lottery Lure", secret: "Requests sensitive credentials (OTP, PIN, Password, Aadhaar)",
@@ -325,6 +345,15 @@ const T = {
         "फ़ीस लेकर पैसे वापस दिलाने का वादा करने वाले को भुगतान न करें। यह दूसरा स्कैम है।"
       ],
     },
+    linkTitle: "जुड़ी हुई स्कैम रिपोर्ट",
+    linkNote: "रिपोर्ट खोजने के लिए सिर्फ़ मैसेज में मिले फ़ोन नंबर, लिंक और UPI ID भेजे जाते हैं। मैसेज का टेक्स्ट कभी नहीं भेजा जाता। डेमो रिपोर्ट नकली (सिमुलेटेड) हैं।",
+    linkNone: "इन जानकारियों से अभी कोई पुरानी रिपोर्ट नहीं मिली। आप पहली रिपोर्ट कर सकते हैं।",
+    linkSummary: "इस मैसेज की जानकारी से मिलती-जुलती {n} पुरानी रिपोर्ट जुड़ी हैं।",
+    linkSeen: "{n} रिपोर्ट में",
+    linkAlso: "इस स्कैम से ये भी जुड़े हैं:",
+    reportBtn: "इस स्कैम की रिपोर्ट करें",
+    reportDone: "धन्यवाद। सिर्फ़ फ़ोन, लिंक और UPI की जानकारी सेव हुई। आगे की जाँच में यही इस्तेमाल होगी।",
+    reportErr: "रिपोर्ट नहीं भेजी जा सकी। बाद में फिर कोशिश करें।",
     flags: {
       urgency: "जल्दी फैसला लेने का दबाव", account: "खाता, KYC, सिम या बिजली कनेक्शन बंद करने की धमकी",
       prize: "इनाम, रिफंड या लॉटरी का लालच", secret: "OTP, PIN, CVV या पासवर्ड माँगना",
@@ -399,6 +428,15 @@ const T = {
         "फी घेऊन पैसे परत मिळवून देण्याचे आश्वासन देणाऱ्याला पैसे देऊ नका. हा दुसरा स्कॅम आहे."
       ],
     },
+    linkTitle: "जोडलेले स्कॅम रिपोर्ट",
+    linkNote: "रिपोर्ट शोधण्यासाठी फक्त मेसेजमधील फोन नंबर, लिंक आणि UPI ID पाठवले जातात. मेसेजचा मजकूर कधीही पाठवला जात नाही. डेमो रिपोर्ट बनावट (सिम्युलेटेड) आहेत.",
+    linkNone: "या माहितीशी जुळणारा जुना रिपोर्ट अजून नाही. तुम्ही पहिला रिपोर्ट करू शकता.",
+    linkSummary: "या मेसेजमधील माहितीशी जुळणारे {n} जुने रिपोर्ट जोडलेले आहेत.",
+    linkSeen: "{n} रिपोर्टमध्ये",
+    linkAlso: "या स्कॅमशी हेही जोडलेले आहे:",
+    reportBtn: "या स्कॅमचा रिपोर्ट करा",
+    reportDone: "धन्यवाद. फक्त फोन, लिंक आणि UPI ची माहिती सेव्ह झाली. पुढील तपासणीत हीच वापरली जाईल.",
+    reportErr: "रिपोर्ट पाठवता आला नाही. नंतर पुन्हा प्रयत्न करा.",
     flags: {
       urgency: "घाई करण्याचा दबाव", account: "खाते, KYC, सिम किंवा वीज कनेक्शन बंद होण्याची धमकी",
       prize: "बक्षीस, रिफंड किंवा लॉटरीचे आमिष", secret: "OTP, PIN, CVV किंवा पासवर्ड मागणे",
@@ -481,6 +519,20 @@ function analyze(text) {
   return { score, hits, ranges, verdict };
 }
 
+const SHORTENERS = ["bit.ly", "tinyurl.com", "cutt.ly", "rb.gy", "is.gd"];
+// Finds phone numbers, links and UPI IDs. Only these (never the message text) are sent to the server.
+function extractEntities(text) {
+  const found = new Map();
+  const add = (t, v) => found.set(t + ":" + v, { t, v });
+  for (const m of text.matchAll(/(?<!\d)(?:\+?91[\s-]?|0)?([6-9]\d{4}[\s-]?\d{5})(?!\d)/g)) add("p", m[1].replace(/\D/g, ""));
+  for (const m of text.matchAll(/\b[a-z0-9._-]{2,40}@[a-z]{2,20}\b(?!\.[a-z0-9])/gi)) add("u", m[0].toLowerCase());
+  for (const m of text.matchAll(/(?<![@\w.-])(?:https?:\/\/)?((?:[a-z0-9-]+\.)+(?:com|in|net|org|xyz|top|click|online|site|live|icu|buzz|ly|gy|gd|link|shop|info))(?![\w@-])(?:\/([a-z0-9_-]+))?/gi)) {
+    const host = m[1].toLowerCase().replace(/^www\./, "");
+    add("d", SHORTENERS.includes(host) && m[2] ? host + "/" + m[2].toLowerCase() : host);
+  }
+  return [...found.values()].slice(0, 10);
+}
+
 const $ = id => document.getElementById(id);
 const GEMINI_MODEL = "gemini-2.5-flash";
 let lang = "en", last = null;
@@ -536,6 +588,7 @@ function runCheck() {
   last = Object.assign({ text }, analyze(text));
   $("aiOut").textContent = "";
   renderResult();
+  lookupLinked();
   $("result").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -579,6 +632,57 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 
 $("openBriefing").addEventListener("click", () => { $("briefingModal").hidden = false; });
 $("closeBriefing").addEventListener("click", () => { $("briefingModal").hidden = true; });
+
+const API_BASE = window.SCAMTRACE_API || "";
+const PRIORITY = ["digitalArrest", "secret", "account", "prize", "qr", "app", "fee", "job", "shortLink", "oddLink", "link", "urgency", "generic"];
+const primaryType = hits => PRIORITY.find(h => hits.includes(h)) || "generic";
+let linked = null;
+
+async function callApi(path, body) {
+  const res = await fetch(API_BASE + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  return res.json();
+}
+
+async function lookupLinked() {
+  const panel = $("linkedPanel"), mine = last;
+  panel.hidden = true; linked = null; $("reportBtn").disabled = false;
+  const entities = extractEntities(mine.text);
+  if (!entities.length) return;
+  try {
+    const data = await callApi("/api/related", { entities });
+    if (mine !== last) return; // a newer check replaced this one
+    linked = { entities, data };
+    panel.hidden = false;
+    renderLinked();
+  } catch (e) { /* server offline (e.g. static hosting): the offline check still works */ }
+}
+
+function renderLinked() {
+  if (!linked) return;
+  const t = T[lang], d = linked.data, ICON = { p: "📞", d: "🔗", u: "💳" };
+  const row = e => "<li>" + ICON[e.t] + " " + esc(e.v) + " <small>" + esc(t.linkSeen.replace("{n}", String(e.n))) + "</small></li>";
+  $("linkedOut").innerHTML = d.reportCount
+    ? "<p><strong>" + esc(t.linkSummary.replace("{n}", String(d.reportCount))) + "</strong></p><ul class=\"linked-list\">" + d.matched.map(row).join("") + "</ul>" +
+      (d.linked.length ? "<p>" + esc(t.linkAlso) + "</p><ul class=\"linked-list\">" + d.linked.map(row).join("") + "</ul>" : "")
+    : "<p>" + esc(t.linkNone) + "</p>";
+  $("reportBtn").hidden = last.verdict === "safe";
+}
+
+$("reportBtn").addEventListener("click", async () => {
+  if (!linked || !last) return;
+  const t = T[lang], btn = $("reportBtn");
+  btn.disabled = true;
+  try {
+    linked.data = await callApi("/api/report", { scamType: primaryType(last.hits), verdict: last.verdict, entities: linked.entities });
+    renderLinked();
+    $("linkedOut").insertAdjacentHTML("beforeend", "<p class=\"rec-note\">" + esc(t.reportDone) + "</p>");
+  } catch (e) {
+    btn.disabled = false;
+    $("linkedOut").insertAdjacentHTML("beforeend", "<p class=\"rec-note\">" + esc(t.reportErr) + "</p>");
+  }
+});
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", renderLinked));
 
 let recType = null;
 function renderRecovery() {
