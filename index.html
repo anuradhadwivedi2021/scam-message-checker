@@ -287,16 +287,16 @@ const SAMPLES = [
 ];
 
 const RULES = [
-  { id: "urgency", weight: 2, re: /immediately|urgent|within \d+ ?(hours?|hrs?|minutes?|mins?)|last chance|today only|expires? (today|soon)|tonight|turant|तुरंत|लगेच|तात्काळ/i },
-  { id: "account", weight: 3, re: /(kyc|pan).{0,40}(update|expire|expired|pending|verify|verification)|(account|a\/c|card|sim|number).{0,40}(blocked|suspended|freez|deactivat|disconnect)|(electricity|power|connection|gas|bill).{0,40}(disconnect|cut|blocked|suspend)|band ho jayega|बंद हो|ब्लॉक/i },
+  { id: "urgency", weight: 2, re: /immediately|urgent|within \d+ ?(hours?|hrs?|minutes?|mins?)|last chance|today only|expires? (today|soon)|turant|तुरंत|लगेच|तात्काळ/i },
+  { id: "account", weight: 4, re: /(kyc|pan).{0,40}(update|expire|expired|pending|verify|verification)|(account|a\/c|card|sim|number).{0,40}(blocked|suspended|freez|deactivat|disconnect)|(electricity|power|connection|gas|bill).{0,40}(disconnect|cut|blocked|suspend)|band ho jayega|बंद हो|ब्लॉक/i },
   { id: "prize", weight: 3, re: /you have won|congratulations|(refund|cashback|reward|prize|lottery|lucky draw|jackpot|gift).{0,50}(claim|click|link|pending|selected)|claim.{0,30}(cashback|reward|prize|refund)|इनाम|लॉटरी|बक्षीस/i },
-  { id: "secret", weight: 4, negatable: true, re: /(share|send|give|tell|enter|provide|reply with).{0,25}(otp|pin|cvv|password|card number)|(otp|pin|cvv|password).{0,25}(share|send|give|tell|enter|provide)/i },
-  { id: "link", weight: 2, re: /https?:\/\/\S+|www\.\S+/i },
+  { id: "secret", weight: 6, negatable: true, re: /(read|tell|say)( me| us)?( the| your)? code\b|(share|send|give|tell|enter|provide|reply with).{0,25}(otp|pin|cvv|password|card number)|(otp|pin|cvv|password).{0,25}(share|send|give|tell|enter|provide)/i },
+  { id: "link", weight: 2, re: /https?:\/\/(?!(www\.)?(hdfcbank\.com|sbi\.co\.in|onlinesbi\.sbi|icicibank\.com|axisbank\.com)(\/|$|\s))\S+|www\.(?!(hdfcbank\.com|sbi\.co\.in|onlinesbi\.sbi|icicibank\.com|axisbank\.com)(\/|$|\s))\S+/i },
   { id: "shortLink", weight: 2, re: /\b(bit\.ly|tinyurl\.com|cutt\.ly|t\.co|rb\.gy|is\.gd)\/\S*/i },
   { id: "oddLink", weight: 2, re: /(https?:\/\/|www\.)[^\s\/]*-[^\s\/]*|[a-z0-9-]+\.(xyz|top|click|online|site|live|icu|buzz)\b/i },
   { id: "app", weight: 3, re: /(install|download).{0,30}(app|apk|anydesk|teamviewer|quicksupport)|\.apk\b|anydesk|teamviewer|quicksupport/i },
   { id: "fee", weight: 2, re: /processing fee|registration fee|advance (payment|fee)|(pay|send|deposit|transfer).{0,30}(₹|rs\.?|inr)/i },
-  { id: "job", weight: 2, re: /(earn|income).{0,30}(daily|per day|weekly)|work from home|part.?time job/i },
+  { id: "job", weight: 4, re: /(earn|income).{0,30}(daily|per day|weekly)|work from home|part.?time job|join.{0,25}(whatsapp|telegram)/i },
   { id: "qr", weight: 3, re: /scan.{0,25}qr|qr code.{0,25}(receive|refund|claim)|approve.{0,20}(request|payment)|collect request/i },
   { id: "digitalArrest", weight: 5, re: /digital arrest|cbi|police arrest|ed notice|skype call|video call arrest|court warrant|गिरफ़्तार|अरेस्ट/i },
   { id: "generic", weight: 1, re: /dear (customer|user|sir|madam|account holder)|प्रिय ग्राहक/i }
