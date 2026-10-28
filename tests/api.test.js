@@ -21,6 +21,11 @@ test("GET / serves the app", async () => {
   const r = await fetch(base + "/");
   assert.ok((await r.text()).includes("ScamGuard"));
 });
+test("GET /tips.html serves the quiz page", async () => {
+  const r = await fetch(base + "/tips.html");
+  assert.strictEqual(r.status, 200);
+  assert.ok((await r.text()).includes("Safety Tips Quiz"));
+});
 test("path traversal and other files are not served", async () => {
   for (const p of ["/server/store.js", "/..%2Fserver%2Fstore.js", "/package.json", "/server/data.json"])
     assert.strictEqual((await fetch(base + p)).status, 404, p);

@@ -17,46 +17,62 @@ If you open `index.html` directly without the server, the message checker still 
 1. Choose a sample message from the dropdown, or paste a suspicious SMS or WhatsApp message (up to 2000 characters).
 2. Press **Check message**.
 3. Read the result:
-   - **Verdict:** POTENTIAL SCAM, SUSPICIOUS, or NO OBVIOUS WARNING SIGNS, with a risk meter.
+   - **Verdict:** POTENTIAL SCAM, SUSPICIOUS, or NO OBVIOUS WARNING SIGNS, with a risk meter and score.
    - **Highlighted message:** the risky phrases are marked.
    - **Warning signs:** a plain-language reason for each flag.
    - **What to do:** step-by-step safety advice.
 
-## 3. Language and text size
-- Switch between **English, Hindi and Marathi**. The verdict, advice and recovery steps change too.
+## 3. Language, text size and settings
+- Switch between **English, Hindi and Marathi** at the top. Everything changes, including the recovery steps.
 - Press **A+** for larger text.
+- Open **Settings** (button at the top, or scroll to the bottom of the page):
+  - **High contrast:** stronger black-and-white colours.
+  - **Senior Mode:** larger text, bigger buttons and a simpler screen.
+- Your choices are saved in your browser and apply on every page.
 
-## 4. Connected reports (fraud network lookup)
-The app picks out phone numbers, links and UPI IDs from the message and shows which earlier reports share them. All pre-loaded reports are **simulated**.
-- Press **Report this scam** to add only those details (never the message text) to the list.
-
-## 5. Recovery Assistant ("I already clicked / paid")
+## 4. Recovery Assistant ("Already shared something?")
 Pick your situation:
-- I shared an OTP or PIN
+- I shared my OTP / PIN
 - I clicked a link or installed an app
 - I sent money
+- I shared Aadhaar, PAN or documents
+- I got a "digital arrest" call
 
 Follow the five steps shown. Press **Call Cybercrime Helpline (1930)** to call at once. You can also report a scam number or link on **Sanchar Saathi (Chakshu)**.
 
-## 6. Share and copy
-- **Share with family:** opens WhatsApp with a ready message so a trusted person can help check.
+## 5. Scan history
+At the bottom of the main page. Every check is saved **only in your browser**, and numbers of 4 or more digits (such as OTPs) are hidden.
+- **Search** the saved scans and **filter** by verdict.
+- **Delete** one scan, or **Clear all**.
+- **Export CSV** to download the history as a spreadsheet file.
+
+## 6. Connected reports (fraud network lookup)
+The app picks out phone numbers, links and UPI IDs from the message and shows which earlier reports share them. All pre-loaded reports are **simulated**.
+- Press **Report this scam** to add only those details (never the message text).
+
+## 7. Share and copy
+- **Share with family (WhatsApp)** or **Share by SMS:** opens a ready message so a trusted person can help check.
 - **Copy result:** copies the verdict, reasons, steps and message, useful when reporting to the bank or police.
 
-## 7. Cyber Intelligence Dashboard
-Open `/dashboard.html` (needs the server). It shows total reports, reports per day, scam types, and the biggest connected clusters.
+## 8. Cyber Intelligence Dashboard
+Open `/dashboard.html` (needs the server). It shows total reports, reports per day, scam types and the biggest connected clusters.
 
-## 8. Scam Library
-Open `/scams.html`. It explains 7 common India scams (fake KYC, UPI refund, digital arrest, lottery, job lure, electricity bill, fake APK) with warning signs, in English, Hindi and Marathi.
+## 9. Scam Library
+Open `/scams.html`. It explains 7 common India scams (fake KYC, UPI refund, digital arrest, lottery, job lure, electricity bill, fake APK) with warning signs and what to do, in three languages.
 
-## 9. Optional AI explanation
+## 10. Safety Tips quiz
+Open `/tips.html` (the **Safety Tips** button). Answer 5 questions, read the explanation after each one, and see your score at the end. Five safety habits are listed below the quiz.
+
+## 11. Optional AI explanation
 Open the AI section, paste your own Gemini API key, and press the AI button for a short explanation. The key stays in your browser memory only and is never saved. The message text goes to Google's Gemini API only when you press this button.
 
-## 10. Privacy and safety
-- The message text is checked in your browser. It is never sent to our server or stored.
+## 12. Privacy and safety
+- The message text is checked in your browser. It is never sent to our server or stored there.
 - Only extracted details (phone, link, UPI ID) are sent for lookup, and saved only if you press **Report this scam**.
+- Scan history and settings stay in your own browser.
 - Never share OTPs, PINs, CVVs or passwords with anyone.
 
-**Important:** ScamGuard AI is an awareness aid, not a guarantee. Rules can miss new scam styles. Always verify suspicious messages with your bank using the number on your card. For suspected financial cybercrime in India, call **1930**.
+**Important:** ScamGuard AI is an awareness aid, not a guarantee. Rules can miss new scam styles, and a job scam that asks for money only on a later phone call may be marked only SUSPICIOUS. Always verify suspicious messages with your bank using the number on your card. For suspected financial cybercrime in India, call **1930**.
 
 ## Run the tests
-`node --test` runs 44 automated tests (rule engine, detail extraction, API security). All 44 pass.
+`node --test` runs 47 automated tests (rule engine, recovery steps in 3 languages, detail extraction, API security). All 47 pass.

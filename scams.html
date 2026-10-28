@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ccamTrace ccam Library</title>
+<title>ScamGuard AI Scam Library</title>
 <style>
 :root{--ink:#0e2238;--navy:#0b2540;--navy2:#144468;--bg:#f3f6fa;--card:#fff;--line:#dde5ee;--mut:#556b82;--acc:#0d5ca8;--bad:#c42b32;--good:#157a4a;--amber:#f5a623}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:17px/1.6 system-ui,"Noto cans Devanagari","cegoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:17px/1.6 system-ui,"Noto Sans Devanagari","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 main{width:100%;max-width:1180px;margin:0 auto;padding:20px clamp(12px,3vw,28px) 56px}
 a{color:var(--acc)}
 header{position:relative;overflow:hidden;isolation:isolate;margin-bottom:22px;padding:clamp(24px,4vw,40px);border-radius:26px;color:#fff;background:linear-gradient(135deg,var(--navy),var(--navy2));box-shadow:0 24px 44px -20px rgba(11,37,64,.6)}
@@ -42,11 +42,13 @@ h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.1;margin:0 0 8px;letter-spac
 @media (max-width:560px){body{font-size:16px}header{border-radius:20px}.lang{display:flex;width:100%}.lang button{flex:1;padding:0 8px}.nav a{flex:1 1 calc(50% - 10px);justify-content:center}.help a.call{width:100%;justify-content:center}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+<style>html.hc{--ink:#000;--mut:#222;--line:#222;--bg:#fff;--card:#fff;--navy:#000;--navy2:#000;--brand:#00346b}html.hc body{background:#fff}html.sr body{font-size:22px}</style>
+<script>try{var p=JSON.parse(localStorage.getItem("sg_prefs")||"{}");if(p.hc)document.documentElement.classList.add("hc");if(p.sr)document.documentElement.classList.add("sr")}catch(e){}</script>
 </head>
 <body>
 <main>
   <header>
-    <nav class="nav"><a href="index.html">&larr; <span id="back"></span></a><a href="dashboard.html">📊 Dashboard</a></nav>
+    <nav class="nav"><a href="index.html">&larr; <span id="back"></span></a><a href="dashboard.html">📊 Dashboard</a><a href="tips.html">🧠 Safety Tips</a></nav>
     <h1 id="title"></h1>
     <p class="sub" id="sub"></p>
     <div class="lang" role="group" aria-label="Language">
@@ -65,32 +67,32 @@ h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.1;margin:0 0 8px;letter-spac
 </main>
 <script>
 const UI = {
-  en: { back: "Back to checker", title: "ccam Library", sub: "Common scams in India: how they work, the warning sign, and what to do.", how: "How it works", sign: "Warning sign", act: "What to do", sample: "Example (fictional)", helpT: "Lost money or shared an OTP?", helpD: "Call the National Cybercrime Helpline as soon as possible, then report at cybercrime.gov.in.", call: "Call 1930", note: "Awareness guide only. Examples are fictional. Always confirm with your bank using the number on your card." },
+  en: { back: "Back to checker", title: "Scam Library", sub: "Common scams in India: how they work, the warning sign, and what to do.", how: "How it works", sign: "Warning sign", act: "What to do", sample: "Example (fictional)", helpT: "Lost money or shared an OTP?", helpD: "Call the National Cybercrime Helpline as soon as possible, then report at cybercrime.gov.in.", call: "Call 1930", note: "Awareness guide only. Examples are fictional. Always confirm with your bank using the number on your card." },
   hi: { back: "चेकर पर वापस", title: "स्कैम लाइब्रेरी", sub: "भारत के आम स्कैम: ये कैसे काम करते हैं, चेतावनी का संकेत और क्या करें।", how: "ये कैसे काम करता है", sign: "चेतावनी का संकेत", act: "क्या करें", sample: "उदाहरण (काल्पनिक)", helpT: "पैसे गए या OTP बता दिया?", helpD: "तुरंत राष्ट्रीय साइबर क्राइम हेल्पलाइन पर कॉल करें, फिर cybercrime.gov.in पर शिकायत करें।", call: "1930 पर कॉल करें", note: "यह सिर्फ जागरूकता गाइड है। उदाहरण काल्पनिक हैं। हमेशा अपने कार्ड पर दिए नंबर से बैंक से पुष्टि करें।" },
   mr: { back: "चेकरकडे परत", title: "स्कॅम लायब्ररी", sub: "भारतातील सामान्य स्कॅम: ते कसे चालतात, धोक्याची खूण आणि काय करावे.", how: "हे कसे चालते", sign: "धोक्याची खूण", act: "काय करावे", sample: "उदाहरण (काल्पनिक)", helpT: "पैसे गेले किंवा OTP सांगितला?", helpD: "ताबडतोब राष्ट्रीय सायबर क्राइम हेल्पलाइनला कॉल करा, मग cybercrime.gov.in वर तक्रार करा.", call: "1930 वर कॉल करा", note: "ही फक्त जागरूकता मार्गदर्शिका आहे. उदाहरणे काल्पनिक आहेत. नेहमी कार्डवरील नंबरवरून बँकेकडे खात्री करा." }
 };
-const cCAMc = [
+const SCAMS = [
  { en: { t: "Fake KYC update", h: "A message says your bank account will be blocked today unless you update KYC through a link or by calling a number.", s: "Urgency plus a link that is not your bank's official website.", a: "Do not click. Open your bank's own app or visit the branch. Banks do not ask for KYC through links.", x: "Dear customer, your account will be blocked today. Update KYC: examplebank-kyc-update.xyz" },
    hi: { t: "फर्जी KYC अपडेट", h: "मैसेज कहता है कि KYC अपडेट नहीं किया तो आज खाता बंद हो जाएगा, और लिंक या नंबर देता है।", s: "जल्दबाजी और ऐसा लिंक जो बैंक की असली वेबसाइट नहीं है।", a: "लिंक न खोलें। बैंक के अपने ऐप या शाखा में जाएं। बैंक लिंक से KYC नहीं मांगते।", x: "प्रिय ग्राहक, आपका खाता आज बंद हो जाएगा। KYC अपडेट करें: examplebank-kyc-update.xyz" },
    mr: { t: "बनावट KYC अपडेट", h: "मेसेज सांगतो की KYC अपडेट केले नाही तर आज खाते बंद होईल, आणि लिंक किंवा नंबर देतो.", s: "घाई आणि बँकेची खरी वेबसाइट नसलेली लिंक.", a: "लिंकवर क्लिक करू नका. बँकेचे स्वतःचे ॲप वापरा किंवा शाखेत जा. बँका लिंकवरून KYC मागत नाहीत.", x: "प्रिय ग्राहक, तुमचे खाते आज बंद होईल. KYC अपडेट करा: examplebank-kyc-update.xyz" } },
  { en: { t: "UPI refund or collect request", h: "A stranger says they will refund or pay you, then asks you to scan a QR code, enter your UPI PIN or approve a request.", s: "You are asked to enter your PIN to receive money.", a: "A PIN is only needed to send money, never to receive it. Decline the request and block the sender.", x: "Your refund is ready. Approve the request and enter your UPI PIN to receive it." },
    hi: { t: "UPI रिफंड या कलेक्ट रिक्वेस्ट", h: "कोई अजनबी रिफंड या पैसे भेजने की बात कहकर QR स्कैन करने, UPI PIN डालने या रिक्वेस्ट मंजूर करने को कहता है।", s: "पैसे पाने के लिए PIN डालने को कहा जाता है।", a: "PIN सिर्फ पैसे भेजने के लिए चाहिए, पाने के लिए कभी नहीं। रिक्वेस्ट अस्वीकार करें और भेजने वाले को ब्लॉक करें।", x: "आपका रिफंड तैयार है। पाने के लिए रिक्वेस्ट मंजूर करें और UPI PIN डालें।" },
    mr: { t: "UPI रिफंड किंवा कलेक्ट रिक्वेस्ट", h: "अनोळखी व्यक्ती रिफंड किंवा पैसे पाठवण्याचे सांगून QR स्कॅन करायला, UPI PIN टाकायला किंवा रिक्वेस्ट मंजूर करायला सांगते.", s: "पैसे मिळवण्यासाठी PIN टाकायला सांगितले जाते.", a: "PIN फक्त पैसे पाठवण्यासाठी लागतो, मिळवण्यासाठी कधीच नाही. रिक्वेस्ट नाकारा आणि पाठवणाऱ्याला ब्लॉक करा.", x: "तुमचा रिफंड तयार आहे. मिळवण्यासाठी रिक्वेस्ट मंजूर करा आणि UPI PIN टाका." } },
- { en: { t: "Digital arrest", h: "A caller claims to be police, CBI or customs, says you are linked to a crime, and keeps you on a video call while demanding money.", s: "Threats of arrest and orders not to tell anyone or hang up.", a: "Hang up. No agency arrests people over a video call or takes money to clear a case. Call 1930.", x: "This is the cyber cell. A parcel in your name has illegal items. ctay on video call or be arrested." },
+ { en: { t: "Digital arrest", h: "A caller claims to be police, CBI or customs, says you are linked to a crime, and keeps you on a video call while demanding money.", s: "Threats of arrest and orders not to tell anyone or hang up.", a: "Hang up. No agency arrests people over a video call or takes money to clear a case. Call 1930.", x: "This is the cyber cell. A parcel in your name has illegal items. Stay on video call or be arrested." },
    hi: { t: "डिजिटल अरेस्ट", h: "कॉल करने वाला खुद को पुलिस, CBI या कस्टम्स बताता है, अपराध से जोड़ता है और वीडियो कॉल पर बिठाकर पैसे मांगता है।", s: "गिरफ्तारी की धमकी और किसी को न बताने या फोन न काटने का आदेश।", a: "फोन काट दें। कोई एजेंसी वीडियो कॉल पर गिरफ्तार नहीं करती और केस खत्म करने के लिए पैसे नहीं मांगती। 1930 पर कॉल करें।", x: "यह साइबर सेल है। आपके नाम के पार्सल में अवैध सामान है। वीडियो कॉल पर रहें वरना गिरफ्तारी होगी।" },
    mr: { t: "डिजिटल अरेस्ट", h: "फोन करणारा स्वतःला पोलीस, CBI किंवा कस्टम्स सांगतो, गुन्ह्याशी जोडतो आणि व्हिडिओ कॉलवर ठेवून पैसे मागतो.", s: "अटकेची धमकी आणि कोणाला सांगू नका किंवा फोन कट करू नका असा आदेश.", a: "फोन कट करा. कोणतीही यंत्रणा व्हिडिओ कॉलवर अटक करत नाही किंवा केस मिटवण्यासाठी पैसे घेत नाही. 1930 वर कॉल करा.", x: "हा सायबर सेल आहे. तुमच्या नावाच्या पार्सलमध्ये बेकायदेशीर वस्तू आहेत. व्हिडिओ कॉलवर राहा नाहीतर अटक होईल." } },
  { en: { t: "Lottery or prize win", h: "You are told you won a lottery, gift or KBC-style prize, but must first pay a fee or share bank details.", s: "A prize you never entered for, and a fee to claim it.", a: "Ignore it. Real prizes never ask for money first. Do not share bank details.", x: "Congratulations! You won Rs 25 lakh. Pay Rs 5,000 processing fee to claim." },
    hi: { t: "लॉटरी या इनाम", h: "बताया जाता है कि आपने लॉटरी, गिफ्ट या KBC जैसा इनाम जीता है, पर पहले फीस भरनी होगी या बैंक डिटेल देनी होगी।", s: "ऐसा इनाम जिसमें आपने हिस्सा नहीं लिया, और उसे पाने के लिए फीस।", a: "नजरअंदाज करें। असली इनाम में पहले पैसे नहीं मांगे जाते। बैंक डिटेल न दें।", x: "बधाई हो! आपने 25 लाख रुपये जीते हैं। इनाम पाने के लिए 5,000 रुपये प्रोसेसिंग फीस भरें।" },
    mr: { t: "लॉटरी किंवा बक्षीस", h: "तुम्हाला लॉटरी, गिफ्ट किंवा KBC सारखे बक्षीस लागले आहे, पण आधी फी भरा किंवा बँक तपशील द्या असे सांगितले जाते.", s: "तुम्ही भाग न घेतलेले बक्षीस आणि ते मिळवण्यासाठी फी.", a: "दुर्लक्ष करा. खऱ्या बक्षिसासाठी आधी पैसे मागत नाहीत. बँक तपशील देऊ नका.", x: "अभिनंदन! तुम्ही 25 लाख रुपये जिंकले आहेत. बक्षीस मिळवण्यासाठी 5,000 रुपये प्रक्रिया फी भरा." } },
- { en: { t: "Work from home job lure", h: "An offer to earn daily income by liking videos or completing tasks, often via WhatsApp or Telegram, then asks you to pay to unlock bigger tasks.", s: "High pay for easy work and a request to deposit money.", a: "Do not pay or join task groups. A real employer never charges you to work.", x: "Earn Rs 3,000 daily from home. Join our Telegram group. cmall deposit needed to start." },
+ { en: { t: "Work from home job lure", h: "An offer to earn daily income by liking videos or completing tasks, often via WhatsApp or Telegram, then asks you to pay to unlock bigger tasks.", s: "High pay for easy work and a request to deposit money.", a: "Do not pay or join task groups. A real employer never charges you to work.", x: "Earn Rs 3,000 daily from home. Join our Telegram group. Small deposit needed to start." },
    hi: { t: "वर्क फ्रॉम होम नौकरी का जाल", h: "वीडियो लाइक करने या टास्क पूरे करने पर रोज कमाई का ऑफर, अक्सर WhatsApp या Telegram पर, फिर बड़े टास्क के लिए पैसे जमा करने को कहा जाता है।", s: "आसान काम के बदले ज्यादा पैसे और पैसे जमा करने की मांग।", a: "पैसे न दें और टास्क ग्रुप में न जुड़ें। असली नियोक्ता काम के लिए पैसे नहीं लेता।", x: "घर बैठे रोज 3,000 रुपये कमाएं। हमारे Telegram ग्रुप से जुड़ें। शुरू करने के लिए छोटी जमा राशि लगेगी।" },
    mr: { t: "घरून काम नोकरीचे आमिष", h: "व्हिडिओ लाईक करून किंवा टास्क पूर्ण करून रोज कमाईची ऑफर, अनेकदा WhatsApp किंवा Telegram वर, मग मोठ्या टास्कसाठी पैसे भरायला सांगतात.", s: "सोप्या कामासाठी जास्त पैसे आणि पैसे जमा करण्याची मागणी.", a: "पैसे भरू नका आणि टास्क ग्रुपमध्ये सामील होऊ नका. खरा नियोक्ता कामासाठी पैसे घेत नाही.", x: "घरबसल्या रोज 3,000 रुपये कमवा. आमच्या Telegram ग्रुपमध्ये सामील व्हा. सुरुवातीला थोडी रक्कम भरावी लागेल." } },
  { en: { t: "Electricity bill cut-off", h: "A message says your power will be disconnected tonight unless you pay a pending bill or call an officer's number.", s: "Disconnection threat tonight and a personal mobile number.", a: "Check your bill on the official app or website, or call the number printed on your real bill.", x: "Your electricity will be cut at 9:30 PM. Call officer 98XXXXXXXX to update your bill." },
    hi: { t: "बिजली बिल कटने की धमकी", h: "मैसेज कहता है कि बकाया बिल न भरा या अधिकारी को कॉल न किया तो आज रात बिजली कट जाएगी।", s: "आज रात कनेक्शन कटने की धमकी और किसी का निजी मोबाइल नंबर।", a: "आधिकारिक ऐप या वेबसाइट पर बिल देखें, या अपने असली बिल पर छपे नंबर पर कॉल करें।", x: "आपकी बिजली रात 9:30 बजे कटेगी। बिल अपडेट के लिए अधिकारी को 98XXXXXXXX पर कॉल करें।" },
    mr: { t: "वीज बिल कापण्याची धमकी", h: "मेसेज सांगतो की थकीत बिल भरले नाही किंवा अधिकाऱ्याला कॉल केला नाही तर आज रात्री वीज कापली जाईल.", s: "आज रात्री कनेक्शन तोडण्याची धमकी आणि वैयक्तिक मोबाईल नंबर.", a: "अधिकृत ॲप किंवा वेबसाइटवर बिल तपासा, किंवा तुमच्या खऱ्या बिलावरील नंबरवर कॉल करा.", x: "तुमची वीज रात्री 9:30 वाजता कापली जाईल. बिल अपडेटसाठी अधिकाऱ्याला 98XXXXXXXX वर कॉल करा." } },
- { en: { t: "Fake app (APK) install", h: "A link or file asks you to install an app to claim a refund, track a parcel or pay a bill. The app can read your cMc and OTPs.", s: "An app sent through a message instead of the official app store.", a: "Do not install it. If you already did, uninstall it, call your bank and change your passwords.", x: "Your parcel is held. Install the delivery app from this link to release it." },
-   hi: { t: "फर्जी ऐप (APK) इंस्टॉल", h: "रिफंड, पार्सल ट्रैकिंग या बिल भुगतान के नाम पर ऐप इंस्टॉल करने को कहा जाता है। वह ऐप आपके cMc और OTP पढ़ सकता है।", s: "आधिकारिक ऐप स्टोर की जगह मैसेज से आया ऐप।", a: "इंस्टॉल न करें। कर चुके हों तो अनइंस्टॉल करें, बैंक को कॉल करें और पासवर्ड बदलें।", x: "आपका पार्सल रुका है। छुड़ाने के लिए इस लिंक से डिलीवरी ऐप इंस्टॉल करें।" },
-   mr: { t: "बनावट ॲप (APK) इन्स्टॉल", h: "रिफंड, पार्सल ट्रॅकिंग किंवा बिल भरण्याच्या नावाने ॲप इन्स्टॉल करायला सांगितले जाते. ते ॲप तुमचे cMc आणि OTP वाचू शकते.", s: "अधिकृत ॲप स्टोअरऐवजी मेसेजमधून आलेले ॲप.", a: "इन्स्टॉल करू नका. केले असल्यास अनइन्स्टॉल करा, बँकेला कॉल करा आणि पासवर्ड बदला.", x: "तुमचे पार्सल अडकले आहे. सोडवण्यासाठी या लिंकवरून डिलिव्हरी ॲप इन्स्टॉल करा." } }
+ { en: { t: "Fake app (APK) install", h: "A link or file asks you to install an app to claim a refund, track a parcel or pay a bill. The app can read your SMS and OTPs.", s: "An app sent through a message instead of the official app store.", a: "Do not install it. If you already did, uninstall it, call your bank and change your passwords.", x: "Your parcel is held. Install the delivery app from this link to release it." },
+   hi: { t: "फर्जी ऐप (APK) इंस्टॉल", h: "रिफंड, पार्सल ट्रैकिंग या बिल भुगतान के नाम पर ऐप इंस्टॉल करने को कहा जाता है। वह ऐप आपके SMS और OTP पढ़ सकता है।", s: "आधिकारिक ऐप स्टोर की जगह मैसेज से आया ऐप।", a: "इंस्टॉल न करें। कर चुके हों तो अनइंस्टॉल करें, बैंक को कॉल करें और पासवर्ड बदलें।", x: "आपका पार्सल रुका है। छुड़ाने के लिए इस लिंक से डिलीवरी ऐप इंस्टॉल करें।" },
+   mr: { t: "बनावट ॲप (APK) इन्स्टॉल", h: "रिफंड, पार्सल ट्रॅकिंग किंवा बिल भरण्याच्या नावाने ॲप इन्स्टॉल करायला सांगितले जाते. ते ॲप तुमचे SMS आणि OTP वाचू शकते.", s: "अधिकृत ॲप स्टोअरऐवजी मेसेजमधून आलेले ॲप.", a: "इन्स्टॉल करू नका. केले असल्यास अनइन्स्टॉल करा, बँकेला कॉल करा आणि पासवर्ड बदला.", x: "तुमचे पार्सल अडकले आहे. सोडवण्यासाठी या लिंकवरून डिलिव्हरी ॲप इन्स्टॉल करा." } }
 ];
 const $ = id => document.getElementById(id);
 function add(parent, tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; e.textContent = text; parent.appendChild(e); return e; }
@@ -98,16 +100,16 @@ function render(l) {
   const u = UI[l]; document.documentElement.lang = l;
   $("back").textContent = u.back; $("title").textContent = u.title; $("sub").textContent = u.sub;
   $("helpT").textContent = u.helpT; $("helpD").textContent = u.helpD; $("callB").textContent = u.call; $("note").textContent = u.note;
-  document.querycelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", ctring(b.dataset.l === l)));
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === l)));
   const g = $("grid"); g.textContent = "";
-  cCAMc.forEach(s => { const d = s[l], c = document.createElement("div"); c.className = "card"; g.appendChild(c);
+  SCAMS.forEach(s => { const d = s[l], c = document.createElement("div"); c.className = "card"; g.appendChild(c);
     add(c, "h2", "", d.t);
     add(c, "span", "tag", u.how); add(c, "p", "", d.h);
     add(c, "span", "tag", u.sign); add(c, "p", "", d.s);
     add(c, "span", "tag", u.act); add(c, "p", "do", d.a);
     add(c, "div", "sample", u.sample + ": " + d.x); });
 }
-document.querycelectorAll(".lang button").forEach(b => b.addEventListener("click", () => render(b.dataset.l)));
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => render(b.dataset.l)));
 render("en");
 </script>
 </body>

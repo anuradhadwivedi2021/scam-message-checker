@@ -25,6 +25,11 @@ Paste a suspicious SMS or WhatsApp message. The app:
 10. **Sanchar Saathi (Chakshu) link** to report a scam number or link, next to the 1930 button.
 11. **Larger text (A+)** toggle for easier reading.
 12. Optional: a short AI explanation using the user's own Gemini API key.
+13. **Scan history:** every check is saved in the user's own browser (digits of 4 or more are hidden). Search, filter by verdict, delete one, clear all, or export to a CSV file.
+14. **Safety Tips quiz** (`/tips.html`): 5 questions with explanations in English, Hindi and Marathi.
+15. **Settings:** High contrast and **Senior Mode** (larger text, bigger buttons, simpler screen), saved in the browser.
+16. **Recovery Assistant now covers 5 situations:** shared OTP/PIN, clicked a link or installed an app, sent money, shared Aadhaar/PAN/documents, and received a "digital arrest" call.
+17. **Share with family** by WhatsApp or SMS.
 
 ## How it works
 - A rule engine in `index.html` scores 13 scam signals (urgency, account-block threats, prizes, OTP/PIN requests, links, short links, odd links, app installs, fees, job lures, QR/payment requests, "digital arrest", impersonal greetings).
@@ -39,7 +44,7 @@ Needs Node.js 18 or newer.
 2. Run `node server/server.js`
 3. Open `http://localhost:3000`
 4. Choose a sample message (for example the fake KYC one) or paste your own, then press **Check message**.
-5. Open `http://localhost:3000/dashboard.html` for the dashboard and `http://localhost:3000/scams.html` for the Scam Library.
+5. Open `http://localhost:3000/dashboard.html` for the dashboard, `/scams.html` for the Scam Library and `/tips.html` for the Safety Tips quiz. History and Settings are at the bottom of the main page.
 6. Optional AI: open the AI section, paste a Gemini API key, press the AI button.
 
 If you open `index.html` directly without the server, the checker still works but the connected-reports panel is hidden.
@@ -48,13 +53,14 @@ If you open `index.html` directly without the server, the checker still works bu
 ```
 node --test
 ```
-44 automated tests, 44 passing: rule engine (scam, suspicious and safe messages, a Hindi message, a look-alike domain, edge cases, all built-in samples), detail extraction, and the API (validation, rate limit, body limit, security headers).
+47 automated tests, 47 passing: rule engine (scam, suspicious and safe messages, a Hindi message, a look-alike domain, an unsolicited job offer, edge cases, all built-in samples), the 5 recovery scenarios in 3 languages, detail extraction, and the API (validation, rate limit, body limit, security headers, quiz page).
 
 The pages (checker, dashboard, Scam Library) and the new buttons were also tried by hand in the browser.
 
 ## Data safety
 - Message text is processed in the browser only. It is never sent to our server and never stored.
 - Only extracted details (phone, link, UPI ID) are sent to the server, and saved only if the user presses "Report this scam".
+- Scan history is stored only in the user's own browser (localStorage), with long digit strings such as OTPs and phone numbers replaced by XXXX. It never reaches the server. "Clear all" removes it.
 - All pre-loaded reports are **simulated** and marked as such. No real person's data is used.
 - "Share with family" and "Copy result" only act when the user presses them. "Share with family" puts the message text into the WhatsApp link the user chooses to send.
 - The Gemini key is typed by the user, kept in memory only, and never saved or hardcoded. If the user presses the AI button, the message text goes to Google's Gemini API.
@@ -62,6 +68,9 @@ The pages (checker, dashboard, Scam Library) and the new buttons were also tried
 
 ## Limitations
 - Rules can miss new scam styles. Real-world accuracy is unknown because the test set is small and hand-written. For example, a digital-arrest message with few trigger words may be marked SUSPICIOUS instead of SCAM.
+- A fake job offer that asks for money only later on a phone call has no payment words in the text, so it is marked SUSPICIOUS (with job-scam advice), not SCAM.
+- Quiz, history and settings text in Hindi and Marathi should also be reviewed by a native speaker.
+- Scan history lives in one browser only: clearing browser data or switching device removes it.
 - Screenshot and URL-only analysis are not built. Only pasted text is analysed.
 - The fraud network is shown as lists and clusters, not as a graph picture.
 - The fraud network uses simulated demo reports. There are no user accounts, so a real deployment would need verification and moderation against fake or spam reports.

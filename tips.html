@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScamGuard AI Safety Tips Quiz</title>
+<style>
+:root{--ink:#0e2238;--navy:#0b2540;--navy2:#144468;--bg:#f3f6fa;--card:#fff;--line:#dde5ee;--mut:#556b82;--acc:#0d5ca8;--bad:#c42b32;--good:#157a4a;--amber:#f5a623}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:17px/1.6 system-ui,"Noto Sans Devanagari","Segoe UI",Roboto,Arial,sans-serif}
+main{width:100%;max-width:820px;margin:0 auto;padding:20px clamp(12px,3vw,28px) 56px}
+header{margin-bottom:22px;padding:clamp(24px,4vw,40px);border-radius:26px;color:#fff;background:linear-gradient(135deg,var(--navy),var(--navy2));box-shadow:0 24px 44px -20px rgba(11,37,64,.6)}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem}
+.nav a:hover{background:rgba(255,255,255,.22)}
+h1{font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.1;margin:0 0 8px;letter-spacing:-.02em}
+.sub{margin:0;max-width:56ch;color:#cfe0f1;font-size:1.05rem}
+.lang{display:inline-flex;gap:2px;margin-top:20px;padding:4px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08)}
+.lang button{background:transparent;color:#fff;border:0;min-height:44px;padding:0 18px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer}
+.lang button[aria-pressed=true]{background:#fff;color:var(--navy)}
+:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;margin-bottom:18px;box-shadow:0 1px 2px rgba(14,34,56,.05),0 16px 34px -20px rgba(14,34,56,.25)}
+.prog{color:var(--mut);font-weight:700;margin:0 0 6px}
+.bar{height:10px;background:rgba(14,34,56,.09);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .4s}
+h2{font-size:1.25rem;margin:0 0 14px;line-height:1.4}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;text-align:left;min-height:52px;padding:12px 16px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt.right{border-color:var(--good);background:#eaf7f0}
+.opt.wrong{border-color:var(--bad);background:#fdf3f2}
+.opt:disabled{cursor:default}
+.fb{margin-top:14px;padding:12px 14px;border-radius:14px;background:#f0f5fb;border-left:5px solid var(--acc)}
+.fb strong{display:block}
+.btn{font:inherit;font-weight:700;min-height:52px;padding:0 26px;border-radius:14px;cursor:pointer;border:2px solid var(--ink);background:var(--ink);color:#fff;margin-top:14px}
+.score{font-size:2.4rem;font-weight:800;margin:6px 0}
+.habits li{margin-bottom:8px}
+.help{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#fff5f5,#ffeceb);border:1.5px solid #f3c4c8;border-radius:20px;padding:18px 22px}
+.help strong{color:var(--bad)}
+.help a{display:inline-flex;align-items:center;min-height:52px;background:var(--bad);color:#fff;text-decoration:none;padding:0 26px;border-radius:999px;font-weight:800}
+[hidden]{display:none!important}
+html.hc{--ink:#000;--mut:#222;--line:#222;--bg:#fff;--card:#fff;--navy:#000;--navy2:#000;--acc:#00346b}
+html.hc body{background:#fff}
+html.sr body{font-size:22px}
+html.sr .opt,html.sr .btn{min-height:64px}
+@media (max-width:560px){body{font-size:16px}header{border-radius:20px}.lang{display:flex;width:100%}.lang button{flex:1;padding:0 8px}.nav a{flex:1 1 calc(50% - 10px);justify-content:center}.help a{width:100%;justify-content:center}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script>try{var p=JSON.parse(localStorage.getItem("sg_prefs")||"{}");if(p.hc)document.documentElement.classList.add("hc");if(p.sr)document.documentElement.classList.add("sr")}catch(e){}</script>
+</head>
+<body>
+<main>
+  <header>
+    <nav class="nav"><a href="index.html">&larr; <span id="back"></span></a><a href="scams.html">📚 Scam Library</a></nav>
+    <h1 id="title"></h1>
+    <p class="sub" id="sub"></p>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-l="en" aria-pressed="true">EN</button>
+      <button data-l="hi" aria-pressed="false">हिन्दी</button>
+      <button data-l="mr" aria-pressed="false">मराठी</button>
+    </div>
+  </header>
+
+  <section class="card" id="quiz" aria-live="polite">
+    <p class="prog" id="prog"></p>
+    <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+    <div id="qBody"></div>
+  </section>
+
+  <section class="card">
+    <h2 id="habitsT"></h2>
+    <ol class="habits" id="habits"></ol>
+  </section>
+
+  <div class="help">
+    <div><strong id="helpT"></strong></div>
+    <a href="tel:1930" id="callB"></a>
+  </div>
+</main>
+<script>
+const UI = {
+  en: { back: "Back to checker", title: "Safety Tips Quiz", sub: "Five quick questions to test your online safety knowledge.", q: "Question {n} of {t}", next: "Next question", finish: "See my score", again: "Try again", right: "Correct.", wrong: "Not quite.", done: "Quiz complete", scoreOf: "You got {s} of {t} right.", great: "Great work. Share these tips with your family.", keep: "Good start. Read the explanations and try again.", habitsT: "Five safety habits", helpT: "Lost money or shared a code? Act fast.", call: "📞 Call 1930" },
+  hi: { back: "चेकर पर वापस", title: "सेफ्टी टिप्स क्विज़", sub: "ऑनलाइन सुरक्षा की जानकारी जाँचने के लिए पाँच छोटे सवाल।", q: "सवाल {n} / {t}", next: "अगला सवाल", finish: "मेरा स्कोर देखें", again: "फिर से कोशिश करें", right: "सही।", wrong: "सही नहीं।", done: "क्विज़ पूरा हुआ", scoreOf: "आपके {t} में से {s} जवाब सही रहे।", great: "बहुत बढ़िया। ये टिप्स अपने परिवार को भी बताएँ।", keep: "अच्छी शुरुआत। स्पष्टीकरण पढ़कर फिर कोशिश करें।", habitsT: "सुरक्षा की पाँच आदतें", helpT: "पैसे गए या कोड बता दिया? तुरंत कदम उठाएँ।", call: "📞 1930 पर कॉल करें" },
+  mr: { back: "चेकरकडे परत", title: "सेफ्टी टिप्स क्विझ", sub: "ऑनलाइन सुरक्षेची माहिती तपासण्यासाठी पाच छोटे प्रश्न.", q: "प्रश्न {n} / {t}", next: "पुढील प्रश्न", finish: "माझा स्कोअर पाहा", again: "पुन्हा प्रयत्न करा", right: "बरोबर.", wrong: "बरोबर नाही.", done: "क्विझ पूर्ण झाले", scoreOf: "तुमचे {t} पैकी {s} उत्तरे बरोबर आली.", great: "छान. हे सल्ले तुमच्या कुटुंबालाही सांगा.", keep: "चांगली सुरुवात. स्पष्टीकरण वाचून पुन्हा प्रयत्न करा.", habitsT: "सुरक्षेच्या पाच सवयी", helpT: "पैसे गेले किंवा कोड सांगितला? लगेच कृती करा.", call: "📞 1930 ला कॉल करा" }
+};
+// a = index of the correct option
+const QUIZ = [
+  { a: 1,
+    en: { q: "A message says: “Share the OTP to get your refund.” What should you do?", o: ["Share it quickly before the refund expires", "Never share it. Ignore the message and report it", "Share it only if the sender sounds polite"], e: "An OTP is a private key to your money. No bank, shop or government office will ever ask you for it." },
+    hi: { q: "मैसेज में लिखा है: “रिफंड पाने के लिए OTP बताइए।” आप क्या करेंगे?", o: ["रिफंड खत्म होने से पहले जल्दी बता दूँगा", "कभी नहीं बताऊँगा। मैसेज को अनदेखा करके रिपोर्ट करूँगा", "भेजने वाला शिष्ट लगे तो ही बताऊँगा"], e: "OTP आपके पैसे की निजी चाबी है। कोई बैंक, दुकान या सरकारी दफ़्तर आपसे OTP कभी नहीं माँगता।" },
+    mr: { q: "मेसेजमध्ये लिहिले आहे: “रिफंड मिळवण्यासाठी OTP सांगा.” तुम्ही काय कराल?", o: ["रिफंड संपण्यापूर्वी लगेच सांगेन", "कधीच सांगणार नाही. मेसेज दुर्लक्षित करून रिपोर्ट करेन", "पाठवणारा नम्र वाटला तरच सांगेन"], e: "OTP ही तुमच्या पैशाची खासगी चावी आहे. कोणतीही बँक, दुकान किंवा सरकारी कार्यालय OTP कधीच मागत नाही." } },
+  { a: 2,
+    en: { q: "A caller says you are under “digital arrest” and must stay on a video call. What is true?", o: ["It is a legal process, so you must obey", "Pay a small fine and it will end", "It is a scam. Real police never arrest people over a video call"], e: "Hang up, tell someone you trust, and call 1930. Scammers use fear and secrecy to keep you on the line." },
+    hi: { q: "कॉल करने वाला कहता है कि आप “डिजिटल अरेस्ट” में हैं और वीडियो कॉल पर रहना होगा। सही क्या है?", o: ["यह कानूनी प्रक्रिया है, इसलिए मानना होगा", "थोड़ा जुर्माना भर दें तो मामला खत्म", "यह स्कैम है। असली पुलिस वीडियो कॉल पर गिरफ़्तारी नहीं करती"], e: "कॉल काटें, किसी भरोसेमंद को बताएँ और 1930 पर कॉल करें। ठग डर और गोपनीयता से आपको कॉल पर बाँधे रखते हैं।" },
+    mr: { q: "फोन करणारा म्हणतो की तुम्ही “डिजिटल अरेस्ट” मध्ये आहात आणि व्हिडिओ कॉलवर राहावे लागेल. काय खरे आहे?", o: ["ही कायदेशीर प्रक्रिया आहे, त्यामुळे ऐकावे लागेल", "थोडा दंड भरला की संपते", "हा स्कॅम आहे. खरे पोलीस व्हिडिओ कॉलवर अटक करत नाहीत"], e: "कॉल बंद करा, विश्वासू व्यक्तीला सांगा आणि 1930 वर कॉल करा. ठग भीती आणि गुप्ततेने तुम्हाला कॉलवर अडकवून ठेवतात." } },
+  { a: 0,
+    en: { q: "You sent money to a scammer. What is the most important first step?", o: ["Call 1930 and your bank immediately", "Wait a few days to see if the money returns", "Pay a recovery agent who promises to get it back"], e: "Reporting quickly gives the bank and authorities the best chance to freeze the money. Recovery agents are a second scam." },
+    hi: { q: "आपने किसी ठग को पैसे भेज दिए। सबसे ज़रूरी पहला कदम क्या है?", o: ["तुरंत 1930 और अपने बैंक को कॉल करें", "कुछ दिन इंतज़ार करें कि पैसे लौटते हैं या नहीं", "पैसे वापस दिलाने का वादा करने वाले एजेंट को फीस दें"], e: "जल्दी शिकायत करने से बैंक और अधिकारियों को पैसे रोकने का सबसे अच्छा मौका मिलता है। रिकवरी एजेंट दूसरा स्कैम होते हैं।" },
+    mr: { q: "तुम्ही एखाद्या ठगाला पैसे पाठवले. सर्वात महत्त्वाची पहिली कृती कोणती?", o: ["लगेच 1930 आणि तुमच्या बँकेला कॉल करा", "पैसे परत येतात का ते पाहण्यासाठी काही दिवस थांबा", "पैसे परत मिळवून देण्याचे आश्वासन देणाऱ्या एजंटला फी द्या"], e: "लवकर तक्रार केल्यास बँक आणि अधिकाऱ्यांना पैसे थांबवण्याची सर्वोत्तम संधी मिळते. रिकव्हरी एजंट हा दुसरा स्कॅम असतो." } },
+  { a: 1,
+    en: { q: "You get a link: hdfcbank.com.verify-login.xyz. Is it the real bank?", o: ["Yes, it starts with hdfcbank.com", "No. The real site name ends before the first slash, and this one ends in .xyz", "Yes, if it has a padlock symbol"], e: "Scammers put a real bank name at the start of a look-alike address. Open your bank's app or type its website yourself." },
+    hi: { q: "आपको लिंक मिला: hdfcbank.com.verify-login.xyz। क्या यह असली बैंक है?", o: ["हाँ, यह hdfcbank.com से शुरू होता है", "नहीं। असली साइट का नाम पहले स्लैश से पहले खत्म होता है, और यह .xyz पर खत्म होता है", "हाँ, अगर इसमें ताले का निशान हो"], e: "ठग नकली पते की शुरुआत में असली बैंक का नाम लगा देते हैं। बैंक का ऐप खोलें या उसकी वेबसाइट खुद टाइप करें।" },
+    mr: { q: "तुम्हाला लिंक मिळाली: hdfcbank.com.verify-login.xyz. हीच खरी बँक आहे का?", o: ["हो, ती hdfcbank.com ने सुरू होते", "नाही. खऱ्या साइटचे नाव पहिल्या स्लॅशच्या आधी संपते, आणि ही .xyz वर संपते", "हो, जर तिच्यावर कुलुपाचे चिन्ह असेल"], e: "ठग बनावट पत्त्याच्या सुरुवातीला खऱ्या बँकेचे नाव लावतात. बँकेचे ॲप उघडा किंवा तिची वेबसाइट स्वतः टाइप करा." } },
+  { a: 2,
+    en: { q: "A job offer asks you to pay a registration or training fee before you join. What does this mean?", o: ["It is normal for all companies", "It is fine if the fee is small", "It is a warning sign of a job scam. Real employers do not charge to hire you"], e: "Scammers often ask for money on a later phone call, not in the message. If anyone asks you to pay for a job, stop and report it." },
+    hi: { q: "नौकरी के ऑफर में जॉइन करने से पहले रजिस्ट्रेशन या ट्रेनिंग फीस माँगी जाती है। इसका क्या मतलब है?", o: ["यह सभी कंपनियों में आम बात है", "फीस कम हो तो ठीक है", "यह नौकरी के स्कैम की चेतावनी है। असली कंपनी नौकरी देने के पैसे नहीं लेती"], e: "ठग अक्सर पैसे मैसेज में नहीं, बाद के फ़ोन कॉल पर माँगते हैं। कोई भी नौकरी के लिए पैसे माँगे तो रुकें और रिपोर्ट करें।" },
+    mr: { q: "नोकरीच्या ऑफरमध्ये जॉइन करण्यापूर्वी नोंदणी किंवा प्रशिक्षण फी मागितली आहे. याचा अर्थ काय?", o: ["सर्व कंपन्यांमध्ये हे सामान्य आहे", "फी कमी असेल तर ठीक आहे", "हा नोकरी स्कॅमचा इशारा आहे. खरी कंपनी नोकरी देण्यासाठी पैसे घेत नाही"], e: "ठग अनेकदा पैसे मेसेजमध्ये नाही, तर नंतरच्या फोन कॉलवर मागतात. नोकरीसाठी कोणी पैसे मागितले तर थांबा आणि रिपोर्ट करा." } }
+];
+const HABITS = {
+  en: ["Never share an OTP, UPI PIN, CVV or password.", "Do not install apps (APK files) sent through a message.", "Check the website address carefully before you type anything.", "Real police, banks and offices never demand money on a video call.", "When unsure, call the number printed on your bank card, or call 1930."],
+  hi: ["OTP, UPI PIN, CVV या पासवर्ड कभी किसी को न बताएँ।", "मैसेज से आई ऐप (APK फ़ाइल) इंस्टॉल न करें।", "कुछ भी टाइप करने से पहले वेबसाइट का पता ध्यान से देखें।", "असली पुलिस, बैंक या दफ़्तर वीडियो कॉल पर पैसे नहीं माँगते।", "शक हो तो बैंक कार्ड पर छपे नंबर पर कॉल करें, या 1930 पर कॉल करें।"],
+  mr: ["OTP, UPI PIN, CVV किंवा पासवर्ड कधीही कोणाला सांगू नका.", "मेसेजमधून आलेले ॲप (APK फाइल) इन्स्टॉल करू नका.", "काही टाइप करण्यापूर्वी वेबसाइटचा पत्ता काळजीपूर्वक पाहा.", "खरे पोलीस, बँका किंवा कार्यालये व्हिडिओ कॉलवर पैसे मागत नाहीत.", "शंका असल्यास बँक कार्डवर छापलेल्या नंबरवर कॉल करा, किंवा 1930 वर कॉल करा."]
+};
+const $ = id => document.getElementById(id);
+let lang = "en", idx = 0, score = 0, answered = null;
+const answers = [];
+
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+
+function render() {
+  const u = UI[lang]; document.documentElement.lang = lang;
+  $("back").textContent = u.back; $("title").textContent = u.title; $("sub").textContent = u.sub;
+  $("habitsT").textContent = u.habitsT; $("helpT").textContent = u.helpT; $("callB").textContent = u.call;
+  $("habits").textContent = ""; HABITS[lang].forEach(h => $("habits").appendChild(el("li", "", h)));
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === lang)));
+  const body = $("qBody"); body.textContent = "";
+  if (idx >= QUIZ.length) {
+    $("prog").textContent = u.done; $("barFill").style.width = "100%";
+    body.appendChild(el("p", "score", score + " / " + QUIZ.length));
+    body.appendChild(el("p", "", u.scoreOf.replace("{s}", score).replace("{t}", QUIZ.length)));
+    body.appendChild(el("p", "", score >= 4 ? u.great : u.keep));
+    const b = el("button", "btn", u.again); b.addEventListener("click", () => { idx = 0; score = 0; answered = null; answers.length = 0; render(); }); body.appendChild(b);
+    return;
+  }
+  const q = QUIZ[idx], d = q[lang];
+  $("prog").textContent = u.q.replace("{n}", idx + 1).replace("{t}", QUIZ.length);
+  $("barFill").style.width = (idx / QUIZ.length * 100) + "%";
+  body.appendChild(el("h2", "", d.q));
+  const opts = el("div", "opts"); body.appendChild(opts);
+  d.o.forEach((text, i) => {
+    const b = el("button", "opt", text); b.type = "button";
+    if (answered !== null) { b.disabled = true; if (i === q.a) b.classList.add("right"); else if (i === answered) b.classList.add("wrong"); }
+    b.addEventListener("click", () => pick(i));
+    opts.appendChild(b);
+  });
+  if (answered !== null) {
+    const fb = el("div", "fb"); fb.appendChild(el("strong", "", answered === q.a ? u.right : u.wrong)); fb.appendChild(document.createTextNode(d.e)); body.appendChild(fb);
+    const n = el("button", "btn", idx === QUIZ.length - 1 ? u.finish : u.next);
+    n.addEventListener("click", () => { idx++; answered = null; render(); }); body.appendChild(n);
+    n.focus();
+  }
+}
+function pick(i) { if (answered !== null) return; answered = i; if (i === QUIZ[idx].a) score++; render(); }
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => { lang = b.dataset.l; render(); }));
+render();
+</script>
+</body>
+</html>

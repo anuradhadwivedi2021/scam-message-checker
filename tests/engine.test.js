@@ -27,12 +27,14 @@ const cases = [
   ['scam', 'APK install', 'Your electricity will be disconnected tonight. Install QuickSupport app and call 9812345678'],
 
   // ---- SUSPICIOUS ----
+  ['suspicious', 'Unsolicited job offer (payment asked later on the call)', 'Dear Candidate, you have been shortlisted for a work from home job at Example Technologies. Reference: HRL. Call HR on 9876543210 to confirm your offer.'],
   ['suspicious', 'Parcel link', 'Your parcel could not be delivered. Update address: http://parcel-track.example.top/confirm'],
   ['suspicious', 'Free insurance review', 'You have been selected for a free insurance review. Details: www.insure-offer.example.in'],
 
   // ---- SAFE ----
   ['safe', 'Bank debit alert', 'Example Bank: Rs 450.00 debited from A/c XX1234 at Metro Store via UPI. If not done by you, call the number on the back of your card.'],
   ['safe', 'OTP with warning', '482913 is your OTP for login to Example Shop. Do not share this OTP with anyone. Valid for 10 minutes.'],
+  ['safe', 'Genuine interview schedule', 'Your interview is scheduled for tomorrow 10 AM at our Pune office. Please bring a copy of your resume.'],
   ['safe', 'Normal chat', 'Hi, are you coming for dinner tonight at 8?'],
   ['safe', 'Single word', 'hi'],
   ['safe', 'Genuine bank statement link', 'HDFC Bank: Your statement is ready. View at https://www.hdfcbank.com/statement'],
@@ -66,11 +68,11 @@ test('all 10 built-in samples run without error', () => {
 
 // ---- Recovery Assistant content (EN / HI / MR) ----
 const LANGS = ['en', 'hi', 'mr'];
-const TYPES = ['otp', 'link', 'money'];
+const TYPES = ['otp', 'link', 'money', 'docs', 'arrest'];
 
 test('recovery: every language has labels, note and call text', () => {
   for (const l of LANGS) {
-    for (const k of ['recTitle', 'recDesc', 'recOtp', 'recLink', 'recMoney', 'recCall', 'recNote']) {
+    for (const k of ['recTitle', 'recDesc', 'recOtp', 'recLink', 'recMoney', 'recDocs', 'recArrest', 'recCall', 'recNote', 'smsBtn', 'histTitle', 'histEmpty', 'histExport', 'setTitle', 'setContrast', 'setSenior']) {
       assert.ok(T[l][k] && T[l][k].length > 3, `${l}.${k} missing`);
     }
   }
