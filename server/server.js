@@ -4,6 +4,7 @@ const store = require("./store");
 const PORT = process.env.PORT || 3000;
 const ALLOW_ORIGIN = process.env.ALLOW_ORIGIN || ""; // optional CORS, e.g. your GitHub Pages URL
 const INDEX = path.join(__dirname, "..", "index.html");
+const HOME = path.join(__dirname, "..", "home.html");
 const RULE_IDS = ["urgency", "account", "prize", "secret", "link", "shortLink", "oddLink", "app", "fee", "job", "qr", "digitalArrest", "generic"];
 const REPORT_VERDICTS = ["scam", "suspicious"];
 const RE = { // allowed shape of each detail type
@@ -59,7 +60,11 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
       return res.end(fs.readFileSync(path.join(__dirname, "..", url.pathname.slice(1))));
     }
-    if (req.method === "GET" && (url.pathname === "/" || url.pathname === "/index.html")) {
+    if (req.method === "GET" && (url.pathname === "/" || url.pathname === "/home.html")) {
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      return res.end(fs.readFileSync(HOME));
+    }
+    if (req.method === "GET" && url.pathname === "/index.html") {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
       return res.end(fs.readFileSync(INDEX));
     }
