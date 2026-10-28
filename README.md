@@ -78,3 +78,10 @@ Claude (Anthropic) to plan, generate, test and review code and to draft translat
 
 ## Originality declaration
 This project was built during the hackathon with AI assistance, using fictional sample data only. I can explain the code and the prompts used.
+## Screenshots
+![Verdict](docs/screenshots/1-verdict.png)
+![Recovery Assistant](docs/screenshots/2-recovery.png)
+![Dashboard](docs/screenshots/3-dashboard.png)
+
+## User manual
+See [USER_MANUAL.md](USER_MANUAL.md).
