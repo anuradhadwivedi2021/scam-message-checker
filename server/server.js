@@ -55,6 +55,10 @@ const server = http.createServer(async (req, res) => {
   const ip = String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").split(",")[0].trim();
   try {
     if (req.method === "OPTIONS") { res.writeHead(204); return res.end(); }
+    if (req.method === "GET" && (url.pathname === "/scams.html" || url.pathname === "/dashboard.html")) {
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      return res.end(fs.readFileSync(path.join(__dirname, "..", url.pathname.slice(1))));
+    }
     if (req.method === "GET" && (url.pathname === "/" || url.pathname === "/index.html")) {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
       return res.end(fs.readFileSync(INDEX));
