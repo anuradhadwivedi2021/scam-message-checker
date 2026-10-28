@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ScamGuard – Think Before You Trust</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b1f33;--muted:#51647a;--bg:#f2faf8;--card:#fff;--line:#dfe9ee;--teal:#0e8a74;--teal2:#0a6f5e;--tealSoft:#dff4ee;--red:#d93a3a;--redSoft:#fdeeee;--blue:#2d5fd0;--blueSoft:#eaf0fd;--violet:#7a4bd6;--violetSoft:#f1eafc;--shadow:0 18px 40px -22px rgba(11,60,70,.35);--head:"Plus Jakarta Sans","Noto Sans Devanagari",system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8f1f7;--muted:#9db0c2;--bg:#0a1620;--card:#102230;--line:#1f3446;--tealSoft:#12362f;--redSoft:#3a1b1f;--blueSoft:#16233f;--violetSoft:#241a3d;--shadow:0 18px 40px -22px #000}}
+:root[data-theme="dark"]{--ink:#e8f1f7;--muted:#9db0c2;--bg:#0a1620;--card:#102230;--line:#1f3446;--tealSoft:#12362f;--redSoft:#3a1b1f;--blueSoft:#16233f;--violetSoft:#241a3d;--shadow:0 18px 40px -22px #000}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(900px 500px at 0 0,var(--tealSoft),transparent 70%),var(--bg);color:var(--ink);font:16px/1.55 var(--head);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:44px;height:44px}
+.brand b{display:block;font-size:1.5rem;line-height:1;font-weight:800}
+.brand small{color:var(--muted);font-weight:500;font-size:.8rem}
+.links{display:flex;gap:28px;font-weight:700;font-size:.95rem}
+.links a:hover{color:var(--teal)}
+.navr{display:flex;gap:12px;align-items:center}
+select{font:inherit;font-weight:700;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:700;border:0;border-radius:12px;padding:13px 22px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--teal),var(--teal2));box-shadow:0 10px 22px -12px var(--teal);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.sm{padding:10px 16px;font-size:.88rem}
+.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:start;padding:28px 0 20px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--tealSoft);color:var(--teal2);font-weight:800;font-size:.78rem;letter-spacing:.05em;padding:8px 14px;border-radius:999px}
+h1{font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1.02;letter-spacing:-.035em;margin:18px 0 18px;font-weight:800}
+h1 span{color:var(--teal)}
+.lead{font-weight:700;font-size:1.1rem;margin:0 0 8px}
+.desc{color:var(--muted);max-width:46ch;margin:0 0 22px}
+.feats{display:grid;gap:16px;margin-bottom:26px}
+.feat{display:flex;gap:14px;align-items:center}
+.ic{flex:none;width:52px;height:52px;border-radius:50%;background:var(--tealSoft);display:grid;place-items:center;font-size:1.4rem}
+.feat b{display:block}.feat span{color:var(--muted);font-size:.9rem}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:.88rem;font-weight:500}
+.visual{position:absolute;right:0;top:0;width:44%;height:100%;pointer-events:none}
+.left{position:relative}
+.bubbles{display:grid;gap:14px;justify-items:start;margin:0 0 24px;max-width:300px}
+.bub{display:flex;gap:10px;align-items:center;background:var(--card);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow);font-size:.85rem;font-weight:500;animation:fl 5s ease-in-out infinite}
+.bub:nth-child(2){margin-left:24px;animation-delay:.8s}.bub:nth-child(3){animation-delay:1.6s}
+.bub i{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;color:#fff}
+@keyframes fl{50%{transform:translateY(-6px)}}
+.shield{position:absolute;right:-10px;top:10px;width:300px;opacity:.9}
+.checker{background:var(--card);border-radius:24px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.checker h2{font-size:1.8rem;margin:0 0 6px;letter-spacing:-.02em}
+.checker p{margin:0 0 16px;color:var(--muted);font-size:.95rem}
+textarea{width:100%;height:150px;resize:vertical;font:inherit;font-weight:500;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:14px;padding:14px}
+textarea:focus{outline:2px solid var(--teal);border-color:transparent}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:12px 0 16px;flex-wrap:wrap}
+.row div{display:flex;gap:10px;flex-wrap:wrap}
+#count{color:var(--muted);font-size:.85rem}
+.big{width:100%;padding:16px;font-size:1.05rem}
+.warn{margin:14px 0 20px;background:var(--redSoft);border-radius:12px;padding:12px 14px;font-size:.85rem;display:flex;gap:10px;align-items:center}
+#result{display:none;margin:0 0 20px;border-radius:14px;padding:16px;border-left:6px solid}
+#result.show{display:block}
+#result h3{margin:0 0 6px}
+#result ul{margin:8px 0 0;padding-left:20px;font-size:.9rem}
+.try{font-weight:700;margin:0 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+.ex{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ex button{font:inherit;text-align:left;border:0;border-radius:14px;padding:14px;cursor:pointer;color:var(--ink);transition:transform .15s}
+.ex button:hover{transform:translateY(-2px)}
+.ex b{display:block;margin:6px 0 4px}.ex small{color:var(--muted);font-size:.78rem;line-height:1.3;display:block;font-weight:500}
+.lang{margin:16px 0 0;font-size:.82rem;color:var(--muted)}
+.help{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;background:var(--card);border-radius:20px;padding:22px 28px;box-shadow:var(--shadow);margin:26px 0}
+.hi{display:flex;gap:16px;align-items:center}
+.hi .ic{background:var(--redSoft)}
+.hi big{font-size:2.2rem;font-weight:800;line-height:1}
+.hi small{color:var(--muted);display:block;font-size:.85rem}
+.hi a.l{color:var(--blue);font-weight:700}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding:8px 0 48px}
+.strip b{display:block}.strip span{color:var(--muted);font-size:.88rem}
+@media (max-width:1020px){.links{display:none}.hero{grid-template-columns:1fr}.shield{display:none}.help,.strip{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.ex,.help,.strip{grid-template-columns:1fr}.navr .btn{display:none}.bubbles{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a class="brand" href="#">
+    <svg viewBox="0 0 48 48" fill="none"><path d="M24 3 6 9v14c0 11 7.5 19 18 22 10.500-3 18-11 18-22V9L24 3Z" fill="#0e8a74"/><path d="M24 8 11 12.500V23c0 8.500 5.500 14.500 13 17 7.500-2.500 13-8.500 13-17V12.500L24 8Z" fill="#0b2a3a"/><path d="m16 24 6 6 11-12" stroke="#5eead4" stroke-width="3.500" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><b>ScamGuard</b><small>Your Digital Safety Assistant</small></span>
+  </a>
+  <div class="links"><a href="#how">How It Works</a><a href="#types">Scam Types</a><a href="#help">Safety Centre</a><a href="#faq">FAQ</a></div>
+  <div class="navr">
+    <select aria-label="Language"><option>🌐 English</option><option>हिन्दी</option><option>मराठी</option></select>
+    <a class="btn sm" href="#msg">Check Message →</a>
+  </div>
+</nav>
+
+<section class="hero" id="how">
+  <div class="left">
+    <span class="pill">🛡️ FREE SCAM MESSAGE CHECKER</span>
+    <h1>Think Before<br>You <span>Trust.</span></h1>
+    <p class="lead">Not sure if a message is a scam? Check it before you act.</p>
+    <p class="desc">Check suspicious SMS, WhatsApp messages, emails or payment requests for common scam warning signs, understand why they may be risky, and learn what to do next.</p>
+    <div class="feats">
+      <div class="feat"><div class="ic">🔍</div><div><b>Understand suspicious patterns</b><span>Detect common scam tactics and red flags.</span></div></div>
+      <div class="feat"><div class="ic">📋</div><div><b>See why a message was flagged</b><span>Get clear, easy-to-understand explanations.</span></div></div>
+      <div class="feat"><div class="ic">💡</div><div><b>Get practical next steps to stay safe</b><span>Follow simple guidance to protect yourself.</span></div></div>
+    </div>
+    <div class="cta"><a class="btn" href="#msg">🔍 Check Message →</a><a class="btn ghost" href="#types">📖 Learn How to Stay Safe</a></div>
+    <div class="trust"><span>🔒 No signup required</span><span>⚡ Quick and easy to use</span><span>🛡️ Safety-first guidance</span></div>
+  </div>
+
+  <div class="checker" id="check">
+    <h2>Check a suspicious message</h2>
+    <p>Paste the message you received to check for common scam warning signs.</p>
+    <textarea id="msg" maxlength="2000" placeholder="Paste an SMS, WhatsApp message, email or payment request here…"></textarea>
+    <div class="row">
+      <div><button class="btn ghost sm" id="paste">📋 Paste from clipboard</button><button class="btn ghost sm" id="clear">🗑️ Clear text</button></div>
+      <span id="count">0/2000</span>
+    </div>
+    <button class="btn big" id="go">🔍 Check Message →</button>
+    <div class="warn">🛑 Never enter passwords, OTPs, banking PINs or other sensitive credentials.</div>
+    <div id="result" role="status"></div>
+    <p class="try">Try an example message</p>
+    <div class="ex" id="types">
+      <button style="background:var(--redSoft)" data-t="This is Mumbai police. Your Aadhaar is linked to a criminal case. Stay on video call and transfer money to avoid arrest."><span>📞</span><b>Digital Arrest</b><small>“Your Aadhaar is linked to a criminal case…”</small></button>
+      <button style="background:var(--blueSoft)" data-t="Dear customer, your bank account will be blocked today. Complete KYC now: http://bit.ly/kyc-update"><span>🏛️</span><b>Bank KYC</b><small>“Your account will be blocked today…”</small></button>
+      <button style="background:var(--violetSoft)" data-t="Earn ₹5,000 daily from home! Just like videos. Pay ₹500 registration fee, limited slots, message on Telegram."><span>💼</span><b>Fake Job Offer</b><small>“Earn ₹5,000 daily from home…”</small></button>
+    </div>
+    <p class="lang">🌐 Supports English, Hindi, Marathi and mixed-language messages, where available.</p>
+  </div>
+</section>
+
+<section class="help" id="help">
+  <div class="hi"><div class="ic">📞</div><div><b>Cybercrime Helpline</b><big>1930</big><small>Contact immediately if you have lost money to a cyber scam.</small></div></div>
+  <div class="hi"><div class="ic" style="background:var(--blueSoft)">🖥️</div><div><b>Report Online</b><a class="l" href="https://www.cybercrime.gov.in" target="_blank" rel="noopener">National Cyber Crime Reporting Portal ↗</a><small>www.cybercrime.gov.in</small></div></div>
+  <div class="hi"><div class="ic" style="background:var(--tealSoft)">🛡️</div><div><b>Stay Informed</b><small>Learn about common scams and safety tips.</small></div></div>
+</section>
+
+<section class="strip" id="faq">
+  <div class="feat"><div class="ic">📄</div><div><b>Clear Explanations</b><span>Understand the warning signs in simple language.</span></div></div>
+  <div class="feat"><div class="ic">🗂️</div><div><b>Multiple Scam Categories</b><span>Check common fraud patterns from real-world scenarios.</span></div></div>
+  <div class="feat"><div class="ic">🌐</div><div><b>Multilingual Experience</b><span>Use in English, Hindi, Marathi and mixed languages.</span></div></div>
+  <div class="feat"><div class="ic">🛡️</div><div><b>Practical Safety Guidance</b><span>Learn what to do next and stay safer online.</span></div></div>
+</section>
+</div>
+
+<script>
+const $=id=>document.getElementById(id),msg=$('msg');
+const rules=[
+ [/otp|pin|password|cvv/i,'Asks for OTP, PIN or password – real banks never do.'],
+ [/kyc|account.*(block|suspend)|blocked/i,'Threatens to block your account to create panic.'],
+ [/police|cbi|arrest|aadhaar|customs|criminal|digital arrest/i,'Claims to be police or an agency – “digital arrest” does not exist.'],
+ [/bit\.ly|tinyurl|https?:\/\/|click|link/i,'Contains a link – do not tap unknown links.'],
+ [/won|lottery|prize|claim now|₹\s?\d|rs\.?\s?\d|earn/i,'Promises money or prizes you did not ask for.'],
+ [/registration fee|pay.*fee|transfer|send money|upi/i,'Asks you to pay or transfer money first.'],
+ [/urgent|today|immediately|now|limited/i,'Creates urgency so you do not think.']
+];
+const upd=()=>$('count').textContent=msg.value.length+'/2000';
+msg.oninput=upd;
+$('clear').onclick=()=>{msg.value='';upd();$('result').className=''};
+$('paste').onclick=async()=>{try{msg.value=(await navigator.clipboard.readText()).slice(0,2000);upd()}catch(e){msg.focus()}};
+document.querySelectorAll('.ex button').forEach(b=>b.onclick=()=>{msg.value=b.dataset.t;upd();$('go').click()});
+$('go').onclick=()=>{
+  const t=msg.value.trim(),r=$('result');
+  if(!t){msg.focus();return}
+  const hits=rules.filter(x=>x[0].test(t)).map(x=>x[1]);
+  const lvl=hits.length>=3?['High risk – likely a scam','var(--redSoft)','var(--red)']:hits.length?['Suspicious – be careful','var(--blueSoft)','var(--blue)']:['No common warning signs found','var(--tealSoft)','var(--teal)'];
+  r.className='show';r.style.background=lvl[1];r.style.borderColor=lvl[2];
+  r.innerHTML='<h3>'+lvl[0]+'</h3>'+(hits.length?'<ul>'+hits.map(h=>'<li>'+h+'</li>').join('')+'</ul><p style="margin:10px 0 0;font-size:.9rem"><b>Next:</b> don’t reply or click. If you lost money, call <b>1930</b> right away.</p>':'<p style="margin:0;font-size:.9rem">Still verify with the sender through an official channel.</p>');
+};
+</script>
+</body>
+</html>
