@@ -70,8 +70,10 @@ li{margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#f0f5fb;font-
 const NAMES = { account: "Bank / KYC", secret: "OTP / PIN request", prize: "Prize / refund", app: "App install", fee: "Fee request", link: "Suspicious link", digitalArrest: "Digital arrest", job: "Job lure", qr: "QR / payment", urgency: "Urgency", shortLink: "Short link", oddLink: "Odd link", generic: "Other" };
 const ICON = { p: "Phone ", d: "Link ", u: "UPI " };
 const $ = id => document.getElementById(id);
-fetch("/api/stats").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(s => {
+let loaded = false;
+function render(s) {
   $("total").textContent = s.total; $("last7").textContent = s.last7; $("clusters").textContent = s.clusters.length;
+  $("daily").textContent = ""; $("types").textContent = ""; $("clist").textContent = "";
   const max = Math.max(1, ...s.daily);
   s.daily.forEach(n => { const d = document.createElement("div"); d.style.height = (n / max * 100) + "%"; const sp = document.createElement("span"); sp.textContent = n; d.appendChild(sp); $("daily").appendChild(d); });
   const tmax = Math.max(1, ...s.byType.map(x => x[1]));
@@ -81,8 +83,16 @@ fetch("/api/stats").then(r => { if (!r.ok) throw new Error(r.status); return r.j
     const c = document.createElement("div"); c.className = "n"; c.textContent = n; r.append(a, tr, c); $("types").appendChild(r); });
   s.clusters.forEach(c => { const li = document.createElement("li");
     li.textContent = c.reports + " reports, " + c.entities + " details. Top: " + c.top.map(e => ICON[e.t] + e.v + " (" + e.n + ")").join(", "); $("clist").appendChild(li); });
-  $("note").textContent = s.simulated + " of " + s.total + " reports are simulated demo data.";
-}).catch(() => { $("err").hidden = false; });
+  $("note").textContent = s.simulated + " of " + s.total + " reports are simulated demo data. Live: updates automatically (last update " + new Date().toLocaleTimeString() + ").";
+}
+function load() {
+  fetch("/api/stats", { cache: "no-store" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(s => {
+    loaded = true; $("err").hidden = true; render(s);
+  }).catch(() => { if (!loaded) $("err").hidden = false; });
+}
+load();
+setInterval(() => { if (!document.hidden) load(); }, 5000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) load(); });
 </script>
 </body>
 </html>
