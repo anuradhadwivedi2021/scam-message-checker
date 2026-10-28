@@ -6,9 +6,9 @@ const path = require('path');
 
 // index.html se rule engine nikaal ke test karta hai (koi copy-paste nahi)
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const a = html.indexOf('const SAMPLES');
+const a = html.indexOf('const T = {');
 const b = html.indexOf('const $ = id');
-const { analyze, SAMPLES } = new Function(html.slice(a, b) + '; return { analyze, SAMPLES };')();
+const { analyze, SAMPLES, T } = new Function(html.slice(a, b) + '; return { analyze, SAMPLES, T };')();
 
 // [expected verdict, name, message]
 const cases = [
@@ -62,4 +62,31 @@ test('HTML in message is just text for the engine', () => {
 test('all 10 built-in samples run without error', () => {
   assert.strictEqual(SAMPLES.length, 10);
   SAMPLES.forEach(s => assert.doesNotThrow(() => analyze(s)));
+});
+
+// ---- Recovery Assistant content (EN / HI / MR) ----
+const LANGS = ['en', 'hi', 'mr'];
+const TYPES = ['otp', 'link', 'money'];
+
+test('recovery: every language has labels, note and call text', () => {
+  for (const l of LANGS) {
+    for (const k of ['recTitle', 'recDesc', 'recOtp', 'recLink', 'recMoney', 'recCall', 'recNote']) {
+      assert.ok(T[l][k] && T[l][k].length > 3, `${l}.${k} missing`);
+    }
+  }
+});
+test('recovery: 5 non-empty steps for every type in every language', () => {
+  for (const l of LANGS) for (const t of TYPES) {
+    const steps = T[l].recSteps[t];
+    assert.strictEqual(steps.length, 5, `${l}.${t}`);
+    steps.forEach(x => assert.ok(x.trim().length > 10 && !x.includes('undefined')));
+  }
+});
+test('recovery: "sent money" always starts with calling 1930', () => {
+  for (const l of LANGS) assert.ok(T[l].recSteps.money[0].includes('1930'), l);
+});
+test('recovery: every type mentions cybercrime.gov.in or 1930', () => {
+  for (const l of LANGS) for (const t of TYPES) {
+    assert.ok(T[l].recSteps[t].join(' ').match(/1930|cybercrime\.gov\.in/), `${l}.${t}`);
+  }
 });

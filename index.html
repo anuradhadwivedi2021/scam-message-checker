@@ -76,6 +76,12 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
 .note{font-size:.92rem;border-top:1px dashed var(--line);padding-top:14px;margin-top:22px;color:#556b82;max-width:70ch}
 .badge{background:#e2eefd;color:var(--brand);padding:2px 8px;border-radius:6px;font-size:.85rem;font-weight:bold}
 
+.rec-btn[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.rec-steps{list-style:none;padding:0;counter-reset:s;margin:20px 0 0}
+.rec-steps li{counter-increment:s;position:relative;padding-left:46px;min-height:32px}
+.rec-steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem}
+.rec-note{font-weight:700;margin:14px 0 0}
+#result:not([hidden]){margin-bottom:18px}
 /* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(11,37,64,.62);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:999}
 .modal-content{background:#fff;border-radius:24px;max-width:680px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);animation:pop .3s ease both}
@@ -164,6 +170,17 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
   </div>
 </section>
 
+<section class="panel" id="recovery">
+  <h2 data-i18n="recTitle"></h2>
+  <p style="margin:0 0 4px" data-i18n="recDesc"></p>
+  <div class="row">
+    <button class="btn alt rec-btn" data-rec="otp" aria-pressed="false" data-i18n="recOtp"></button>
+    <button class="btn alt rec-btn" data-rec="link" aria-pressed="false" data-i18n="recLink"></button>
+    <button class="btn alt rec-btn" data-rec="money" aria-pressed="false" data-i18n="recMoney"></button>
+  </div>
+  <div id="recOut" aria-live="polite"></div>
+</section>
+
 <p class="note" data-i18n="disclaimer"></p>
 </main>
 
@@ -204,6 +221,36 @@ const T = {
     empty: "Please paste or select a message to analyze.",
     verdict: { scam: "POTENTIAL SCAM: High Risk Detected", suspicious: "SUSPICIOUS: Exercise Caution", safe: "NO OBVIOUS WARNING SIGNS" },
     stamp: { scam: "SCAM", suspicious: "RISK", safe: "SAFE" },
+    recTitle: "Already shared something? Get recovery steps",
+    recDesc: "Pick what happened. Act fast: the sooner you report, the better the chance of stopping the loss.",
+    recOtp: "I shared my OTP / PIN",
+    recLink: "I clicked a link or installed an app",
+    recMoney: "I sent money",
+    recCall: "📞 Call Cybercrime Helpline (1930)",
+    recNote: "Never pay anyone who promises to get your money back. Only 1930 and your bank can help.",
+    recSteps: {
+      otp: [
+        "Call your bank right now, using the number on the back of your card or the official bank app. Ask them to block your card, UPI and net banking.",
+        "Change your UPI PIN, net banking password and the password of any account that uses the same one.",
+        "Check your bank statement for payments you did not make. Note the time, amount and transaction ID of each.",
+        "Call 1930 and report it. Then file a complaint at cybercrime.gov.in.",
+        "Do not share any more codes, even with someone who says they are from the bank."
+      ],
+      link: [
+        "Close the page. Do not type any card number, OTP, PIN or password on it.",
+        "If you already entered details, call your bank right away and change those passwords.",
+        "If an app was installed from the link, switch on airplane mode, then uninstall it from Settings > Apps. If unsure, take the phone to a service centre.",
+        "Check your bank statement for payments you did not make.",
+        "Report the link at cybercrime.gov.in, or call 1930 if any money was taken."
+      ],
+      money: [
+        "Call 1930 immediately. The sooner you report, the better the chance the money can be frozen.",
+        "Call your bank and ask them to flag the transaction. Keep the transaction ID (UTR), date, time and amount ready.",
+        "Write down the scammer's phone number, UPI ID or account number, and take screenshots of all chats.",
+        "File a complaint at cybercrime.gov.in and visit your nearest police station with the same details.",
+        "Do not pay anyone who promises to recover the money for a fee. That is a second scam."
+      ],
+    },
     flags: {
       urgency: "High Pressure / Tight Deadline Urgency", account: "Threat to block Account, KYC, SIM, or Utility Connection",
       prize: "Unrealistic Prize, Cashback, or Lottery Lure", secret: "Requests sensitive credentials (OTP, PIN, Password, Aadhaar)",
@@ -248,6 +295,36 @@ const T = {
     empty: "कृपया पहले कोई मैसेज पेस्ट करें या चुनें।",
     verdict: { scam: "संभावित स्कैम: उच्च जोखिम पाया गया", suspicious: "संदिग्ध: सावधान रहने की ज़रूरत है", safe: "कोई स्पष्ट चेतावनी संकेत नहीं" },
     stamp: { scam: "स्कैम", suspicious: "सावधान", safe: "सुरक्षित" },
+    recTitle: "कुछ शेयर कर दिया है? रिकवरी के कदम देखें",
+    recDesc: "बताइए क्या हुआ। जल्दी करें: जितनी जल्दी शिकायत होगी, नुकसान रुकने की संभावना उतनी ज़्यादा है।",
+    recOtp: "मैंने OTP / PIN बता दिया",
+    recLink: "मैंने लिंक खोली या ऐप इंस्टॉल किया",
+    recMoney: "मैंने पैसे भेज दिए",
+    recCall: "📞 साइबर क्राइम हेल्पलाइन (1930) पर कॉल करें",
+    recNote: "पैसे वापस दिलाने का वादा करने वाले किसी को भुगतान न करें। मदद सिर्फ़ 1930 और आपका बैंक कर सकते हैं।",
+    recSteps: {
+      otp: [
+        "अभी अपने बैंक को कॉल करें, कार्ड के पीछे छपे नंबर या बैंक के आधिकारिक ऐप से। कार्ड, UPI और नेट बैंकिंग ब्लॉक करवाएँ।",
+        "अपना UPI PIN, नेट बैंकिंग पासवर्ड और वही पासवर्ड इस्तेमाल करने वाले सभी खातों के पासवर्ड बदलें।",
+        "बैंक स्टेटमेंट में ऐसे भुगतान देखें जो आपने नहीं किए। हर भुगतान का समय, रकम और ट्रांज़ैक्शन ID नोट करें।",
+        "1930 पर कॉल करके शिकायत दर्ज करें। फिर cybercrime.gov.in पर शिकायत करें।",
+        "अब कोई और कोड किसी को न बताएँ, चाहे वह खुद को बैंक का कर्मचारी बताए।"
+      ],
+      link: [
+        "पेज बंद कर दें। उस पर कार्ड नंबर, OTP, PIN या पासवर्ड न डालें।",
+        "अगर आप जानकारी डाल चुके हैं, तो तुरंत बैंक को कॉल करें और वे पासवर्ड बदलें।",
+        "अगर लिंक से कोई ऐप इंस्टॉल हुआ है, तो एयरप्लेन मोड चालू करें और Settings > Apps से उसे हटा दें। शक हो तो फ़ोन सर्विस सेंटर ले जाएँ।",
+        "बैंक स्टेटमेंट में ऐसे भुगतान देखें जो आपने नहीं किए।",
+        "cybercrime.gov.in पर लिंक की शिकायत करें, और अगर पैसे कटे हैं तो 1930 पर कॉल करें।"
+      ],
+      money: [
+        "तुरंत 1930 पर कॉल करें। जितनी जल्दी शिकायत होगी, पैसे फ्रीज़ होने की संभावना उतनी बढ़ती है।",
+        "बैंक को कॉल करके उस लेन-देन को फ्लैग करवाएँ। ट्रांज़ैक्शन ID (UTR), तारीख, समय और रकम तैयार रखें।",
+        "ठग का फ़ोन नंबर, UPI ID या खाता नंबर नोट करें और सारी चैट के स्क्रीनशॉट लें।",
+        "cybercrime.gov.in पर शिकायत दर्ज करें और यही जानकारी लेकर नज़दीकी पुलिस स्टेशन जाएँ।",
+        "फ़ीस लेकर पैसे वापस दिलाने का वादा करने वाले को भुगतान न करें। यह दूसरा स्कैम है।"
+      ],
+    },
     flags: {
       urgency: "जल्दी फैसला लेने का दबाव", account: "खाता, KYC, सिम या बिजली कनेक्शन बंद करने की धमकी",
       prize: "इनाम, रिफंड या लॉटरी का लालच", secret: "OTP, PIN, CVV या पासवर्ड माँगना",
@@ -292,6 +369,36 @@ const T = {
     empty: "कृपया आधी मेसेज पेस्ट करा किंवा निवडा.",
     verdict: { scam: "संभाव्य स्कॅम: उच्च धोका आढळला", suspicious: "संशयास्पद: सावध राहा", safe: "कोणतेही स्पष्ट धोक्याचे चिन्ह नाही" },
     stamp: { scam: "स्कॅम", suspicious: "सावध", safe: "सुरक्षित" },
+    recTitle: "काही शेअर केले आहे का? रिकव्हरीचे टप्पे पाहा",
+    recDesc: "काय झाले ते निवडा. लवकर कृती करा: तक्रार जितकी लवकर, तितकी नुकसान थांबवण्याची शक्यता जास्त.",
+    recOtp: "मी OTP / PIN सांगितला",
+    recLink: "मी लिंक उघडली किंवा ॲप इन्स्टॉल केले",
+    recMoney: "मी पैसे पाठवले",
+    recCall: "📞 सायबर क्राइम हेल्पलाइन (1930) ला कॉल करा",
+    recNote: "पैसे परत मिळवून देण्याचे आश्वासन देणाऱ्या कोणालाही पैसे देऊ नका. मदत फक्त 1930 आणि तुमची बँक करू शकते.",
+    recSteps: {
+      otp: [
+        "आत्ताच तुमच्या बँकेला कॉल करा, कार्डच्या मागील नंबरवर किंवा बँकेच्या अधिकृत ॲपवरून. कार्ड, UPI आणि नेट बँकिंग ब्लॉक करायला सांगा.",
+        "तुमचा UPI PIN, नेट बँकिंग पासवर्ड आणि तोच पासवर्ड वापरणाऱ्या सर्व खात्यांचे पासवर्ड बदला.",
+        "बँक स्टेटमेंटमध्ये तुम्ही न केलेले व्यवहार तपासा. प्रत्येक व्यवहाराची वेळ, रक्कम आणि ट्रान्झॅक्शन ID लिहून ठेवा.",
+        "1930 वर कॉल करून तक्रार नोंदवा. नंतर cybercrime.gov.in वर तक्रार करा.",
+        "आणखी कोणताही कोड कोणालाही सांगू नका, तो बँकेचा कर्मचारी असल्याचे सांगत असला तरी."
+      ],
+      link: [
+        "पेज बंद करा. त्यावर कार्ड नंबर, OTP, PIN किंवा पासवर्ड टाकू नका.",
+        "माहिती आधीच टाकली असल्यास लगेच बँकेला कॉल करा आणि ते पासवर्ड बदला.",
+        "लिंकमधून एखादे ॲप इन्स्टॉल झाले असल्यास एअरप्लेन मोड चालू करा आणि Settings > Apps मधून ते काढून टाका. शंका असल्यास फोन सर्व्हिस सेंटरला न्या.",
+        "बँक स्टेटमेंटमध्ये तुम्ही न केलेले व्यवहार तपासा.",
+        "cybercrime.gov.in वर लिंकची तक्रार करा, आणि पैसे कट झाले असल्यास 1930 ला कॉल करा."
+      ],
+      money: [
+        "लगेच 1930 वर कॉल करा. तक्रार जितकी लवकर होईल, तितकी पैसे फ्रीज होण्याची शक्यता जास्त.",
+        "बँकेला कॉल करून तो व्यवहार फ्लॅग करायला सांगा. ट्रान्झॅक्शन ID (UTR), तारीख, वेळ आणि रक्कम तयार ठेवा.",
+        "ठगाचा फोन नंबर, UPI ID किंवा खाते क्रमांक लिहून ठेवा आणि सर्व चॅटचे स्क्रीनशॉट घ्या.",
+        "cybercrime.gov.in वर तक्रार नोंदवा आणि हीच माहिती घेऊन जवळच्या पोलीस ठाण्यात जा.",
+        "फी घेऊन पैसे परत मिळवून देण्याचे आश्वासन देणाऱ्याला पैसे देऊ नका. हा दुसरा स्कॅम आहे."
+      ],
+    },
     flags: {
       urgency: "घाई करण्याचा दबाव", account: "खाते, KYC, सिम किंवा वीज कनेक्शन बंद होण्याची धमकी",
       prize: "बक्षीस, रिफंड किंवा लॉटरीचे आमिष", secret: "OTP, PIN, CVV किंवा पासवर्ड मागणे",
@@ -472,6 +579,21 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 
 $("openBriefing").addEventListener("click", () => { $("briefingModal").hidden = false; });
 $("closeBriefing").addEventListener("click", () => { $("briefingModal").hidden = true; });
+
+let recType = null;
+function renderRecovery() {
+  const t = T[lang], out = $("recOut");
+  document.querySelectorAll(".rec-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rec === recType)));
+  if (!recType) { out.innerHTML = ""; return; }
+  out.innerHTML = '<ol class="rec-steps">' + t.recSteps[recType].map(x => "<li>" + esc(x) + "</li>").join("") + "</ol>" +
+    '<p class="rec-note">' + esc(t.recNote) + "</p>" +
+    '<a href="tel:1930" class="btn-emergency">' + esc(t.recCall) + "</a>";
+}
+document.querySelectorAll(".rec-btn").forEach(b => b.addEventListener("click", () => {
+  recType = (recType === b.dataset.rec) ? null : b.dataset.rec;
+  renderRecovery();
+}));
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", renderRecovery));
 
 applyStaticText();
 </script>
