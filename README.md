@@ -1,4 +1,4 @@
-# ScamTrace AI (Scam Message Checker)
+# scam-message-checker (Scam Message Checker)
 
 **Track:** Cybersecurity & Digital Safety
 **Event:** PromptWars × KickToTech 2026
