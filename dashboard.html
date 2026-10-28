@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScamTrace Cyber Intelligence Dashboard</title>
+<style>
+:root{--ink:#0e2238;--navy:#0b2540;--navy2:#144468;--bg:#f3f6fa;--card:#fff;--line:#dde5ee;--mut:#556b82;--acc:#0d5ca8;--bad:#c42b32;--good:#157a4a;--amber:#f5a623;--teal:#0b6e6e}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:17px/1.6 system-ui,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{width:100%;max-width:1180px;margin:0 auto;padding:20px clamp(12px,3vw,28px) 56px}
+a{color:var(--acc)}
+header{position:relative;overflow:hidden;isolation:isolate;margin-bottom:22px;padding:clamp(24px,4vw,40px);border-radius:26px;color:#fff;background:linear-gradient(135deg,var(--navy),var(--navy2));box-shadow:0 24px 44px -20px rgba(11,37,64,.6)}
+header::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:linear-gradient(115deg,#000 10%,transparent 75%);mask-image:linear-gradient(115deg,#000 10%,transparent 75%)}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;transition:background .2s}
+.nav a:hover{background:rgba(255,255,255,.22)}
+h1{font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.1;margin:0 0 8px;letter-spacing:-.02em}
+.sub{margin:0;max-width:60ch;color:#cfe0f1;font-size:1.05rem}
+:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px;margin-bottom:18px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;box-shadow:0 1px 2px rgba(14,34,56,.05),0 16px 34px -22px rgba(14,34,56,.3);animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+.stat{border-top:5px solid var(--teal)}
+.stat.s2{border-top-color:var(--amber)}
+.stat.s3{border-top-color:var(--bad)}
+.big{font-size:clamp(2.2rem,5vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.lbl{color:var(--mut);font-size:.92rem;margin-top:2px}
+h2{font-size:1.1rem;margin:0 0 14px;letter-spacing:-.01em}
+.bars{display:flex;align-items:flex-end;gap:clamp(6px,2vw,16px);height:160px;padding-top:22px}
+.bars div{flex:1;background:linear-gradient(180deg,#14a0a0,var(--teal));border-radius:8px 8px 0 0;min-height:3px;position:relative}
+.bars span{position:absolute;top:-20px;left:0;right:0;text-align:center;font-size:.8rem;font-weight:700}
+.row{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:.92rem}
+.row .name{width:clamp(96px,28%,140px);flex:none}
+.row .track{flex:1;background:#eef2f6;border-radius:8px;height:14px;overflow:hidden}
+.row .fill{background:linear-gradient(90deg,var(--amber),var(--bad));height:14px;border-radius:8px}
+.row .n{font-weight:700;min-width:1.5em;text-align:right}
+ul{margin:0;padding-left:0;list-style:none}
+li{margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#f0f5fb;font-size:.9rem;overflow-wrap:anywhere}
+.note{color:var(--mut);font-size:.88rem;margin-top:14px;max-width:75ch}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@media (min-width:1500px){main{max-width:1320px}body{font-size:18px}}
+@media (max-width:560px){body{font-size:16px}header{border-radius:20px}.nav a{flex:1 1 calc(50% - 10px);justify-content:center}.bars{height:130px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <nav class="nav"><a href="index.html">&larr; Back to checker</a><a href="scams.html">📚 Scam Library</a></nav>
+    <h1>Cyber Intelligence Dashboard</h1>
+    <p class="sub">Connected scam reports, built only from phone numbers, links and UPI IDs. Message text is never stored.</p>
+  </header>
+  <div class="grid">
+    <div class="card stat"><div class="big" id="total">-</div><div class="lbl">Total reports</div></div>
+    <div class="card stat s2"><div class="big" id="last7">-</div><div class="lbl">Reports in last 7 days</div></div>
+    <div class="card stat s3"><div class="big" id="clusters">-</div><div class="lbl">Connected clusters</div></div>
+  </div>
+  <div class="card" style="margin-bottom:18px"><h2>Reports per day (last 7 days)</h2><div class="bars" id="daily"></div></div>
+  <div class="grid">
+    <div class="card"><h2>Scam types</h2><div id="types"></div></div>
+    <div class="card"><h2>Top connected clusters</h2><ul id="clist"></ul></div>
+  </div>
+  <p class="note" id="note"></p>
+  <p class="note" id="err" hidden>Could not load data. Start the server with <code>node server/server.js</code>.</p>
+</main>
+<script>
+const NAMES = { account: "Bank / KYC", secret: "OTP / PIN request", prize: "Prize / refund", app: "App install", fee: "Fee request", link: "Suspicious link", digitalArrest: "Digital arrest", job: "Job lure", qr: "QR / payment", urgency: "Urgency", shortLink: "Short link", oddLink: "Odd link", generic: "Other" };
+const ICON = { p: "Phone ", d: "Link ", u: "UPI " };
+const $ = id => document.getElementById(id);
+fetch("/api/stats").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(s => {
+  $("total").textContent = s.total; $("last7").textContent = s.last7; $("clusters").textContent = s.clusters.length;
+  const max = Math.max(1, ...s.daily);
+  s.daily.forEach(n => { const d = document.createElement("div"); d.style.height = (n / max * 100) + "%"; const sp = document.createElement("span"); sp.textContent = n; d.appendChild(sp); $("daily").appendChild(d); });
+  const tmax = Math.max(1, ...s.byType.map(x => x[1]));
+  s.byType.forEach(([k, n]) => { const r = document.createElement("div"); r.className = "row";
+    const a = document.createElement("div"); a.className = "name"; a.textContent = NAMES[k] || k;
+    const tr = document.createElement("div"); tr.className = "track"; const f = document.createElement("div"); f.className = "fill"; f.style.width = (n / tmax * 100) + "%"; tr.appendChild(f);
+    const c = document.createElement("div"); c.className = "n"; c.textContent = n; r.append(a, tr, c); $("types").appendChild(r); });
+  s.clusters.forEach(c => { const li = document.createElement("li");
+    li.textContent = c.reports + " reports, " + c.entities + " details. Top: " + c.top.map(e => ICON[e.t] + e.v + " (" + e.n + ")").join(", "); $("clist").appendChild(li); });
+  $("note").textContent = s.simulated + " of " + s.total + " reports are simulated demo data.";
+}).catch(() => { $("err").hidden = false; });
+</script>
+</body>
+</html>

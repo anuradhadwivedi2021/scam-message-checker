@@ -10,7 +10,8 @@
 :root{--ink:#0e2238;--navy:#0b2540;--navy2:#144468;--bg:#f3f6fa;--card:#fff;--line:#dde5ee;--scam:#c42b32;--warn:#a85d00;--safe:#157a4a;--bubble:#eaf1fa;--brand:#0d5ca8;--amber:#f5a623;--emerg-bg:#fff5f5;--emerg-border:#f3c4c8;--head:"Plus Jakarta Sans","Noto Sans Devanagari",system-ui,sans-serif}
 *{box-sizing:border-box}
 body{margin:0;color:var(--ink);background:radial-gradient(900px 420px at 8% -8%,#d9e7f6,transparent 70%),radial-gradient(700px 400px at 100% 0,#e8f3ef,transparent 70%),var(--bg);font:18px/1.65 "Atkinson Hyperlegible","Noto Sans Devanagari",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-main{max-width:920px;margin:0 auto;padding:20px 16px 56px}
+html{-webkit-text-size-adjust:100%}
+main{width:100%;max-width:920px;margin:0 auto;padding:20px clamp(12px,3vw,28px) 56px}
 h1,h2,h3{font-family:var(--head)}
 h2{font-size:1.1rem;margin:0 0 12px;letter-spacing:-.01em}
 
@@ -29,6 +30,8 @@ h1{font-size:clamp(2rem,5.2vw,2.9rem);line-height:1.08;margin:0 0 10px;font-weig
 .briefing-btn{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:.95rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s}
 .briefing-btn:hover{background:rgba(255,255,255,.22)}
 header :focus-visible{outline:3px solid #fff;outline-offset:3px}
+.nav-btns{display:flex;gap:10px;flex-wrap:wrap}
+a.briefing-btn{text-decoration:none}
 
 /* Cards */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;margin-bottom:18px;box-shadow:0 1px 2px rgba(14,34,56,.05),0 16px 34px -20px rgba(14,34,56,.25)}
@@ -109,6 +112,30 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
   .panel{padding:18px;border-radius:18px}
   .row .btn,.row select{flex:1 1 100%}
 }
+@media (min-width:1100px){
+  main{max-width:1180px}
+  header{padding:40px 44px}
+  textarea{min-height:200px}
+  #result:not([hidden]){gap:22px}
+}
+@media (min-width:1500px){
+  main{max-width:1320px}
+  body{font-size:19px}
+}
+@media (max-width:860px){
+  header{flex-direction:column;align-items:stretch}
+  .top-bar{width:100%}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .top-bar{flex-direction:column;align-items:stretch}
+  .nav-btns .briefing-btn{flex:1 1 calc(50% - 10px);justify-content:center;text-align:center}
+  .lang{width:100%}
+  .lang button{flex:1;padding:0 8px}
+  .modal-content{padding:20px;border-radius:18px}
+  .stamp{font-size:1.2rem}
+  .verdict{padding-left:28px}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -121,7 +148,11 @@ input[type=password]{font:inherit;min-height:52px;padding:0 14px;border:2px soli
     <p class="sub" data-i18n="subtitle"></p>
   </div>
   <div class="top-bar">
-    <button class="briefing-btn" id="openBriefing">📋 SDLC Pitch Briefing</button>
+    <div class="nav-btns">
+      <a class="briefing-btn" href="dashboard.html">📊 Dashboard</a>
+      <a class="briefing-btn" href="scams.html">📚 Scam Library</a>
+      <button class="briefing-btn" id="openBriefing">📋 SDLC Pitch Briefing</button>
+    </div>
     <div class="lang" role="group" aria-label="Language">
       <button data-lang="en" aria-pressed="true">EN</button>
       <button data-lang="hi" aria-pressed="false">हिन्दी</button>
