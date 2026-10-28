@@ -25,11 +25,25 @@ const cases = [
   ['scam', 'Job offer + registration fee', 'Earn Rs 5000 daily from home. Pay Rs 500 registration fee to join our Telegram group'],
   ['scam', 'Lookalike bank domain', 'Update KYC now at https://hdfcbank.com.verify-login.xyz immediately'],
   ['scam', 'APK install', 'Your electricity will be disconnected tonight. Install QuickSupport app and call 9812345678'],
+  ['scam', 'Fake police: case registered + transfer money', 'This is the police cybercrime department. A case has been registered against you. Do not disconnect this call. Transfer money now to avoid arrest.'],
+  ['scam', 'Hindi fake police arrest threat', 'यह पुलिस साइबर क्राइम विभाग है। कॉल डिस्कनेक्ट न करें। गिरफ्तारी से बचने के लिए तुरंत पैसे भेजें।'],
+  ['scam', 'Marathi fake police arrest threat', 'हा पोलीस सायबर क्राईम विभाग आहे. अटक टाळण्यासाठी लगेच पैसे पाठवा.'],
+  ['scam', 'Digital arrest + do not leave the video call', 'This is Mumbai Police. You are under digital arrest. Do not tell anyone about this and do not leave the video call.'],
+  ['scam', 'FedEx parcel with drugs + money laundering', 'We are calling from FedEx. A parcel in your name contains illegal drugs. Your Aadhaar is linked to a money laundering case. Stay on the video call.'],
+  ['scam', 'Arrest warrant + pay the fine', 'You will be arrested today. A warrant has been issued in your name. Pay the fine to settle the case.'],
+  ['scam', 'ED officer + RBI safe account', 'ED officer: your bank account is under investigation. Keep this confidential and transfer your savings to the RBI safe account.'],
+  ['scam', 'Hindi digital arrest on video call', 'आप डिजिटल अरेस्ट में हैं। वीडियो कॉल पर बने रहें और पैसे भेजें।'],
+  ['scam', 'Marathi parcel with drugs on video call', 'तुमच्या नावाने पार्सलमध्ये ड्रग्ज सापडले आहेत. व्हिडिओ कॉलवर रहा आणि लगेच पैसे पाठवा.'],
+  ['scam', 'Marathi police: Aadhaar used in crime, transfer money', 'आम्ही पोलीस विभागातून बोलत आहोत. तुमच्या आधार कार्डचा गुन्ह्यात वापर झाला आहे. अटकेपासून वाचण्यासाठी त्वरित पैसे ट्रान्सफर करा.'],
+  ['scam', 'Marathi arrest action + urgent fine', 'तुमच्यावर अटकेची कारवाई होईल. त्वरित दंड भरा. पैसे ट्रान्सफर करा.'],
 
   // ---- SUSPICIOUS ----
   ['suspicious', 'Unsolicited job offer (payment asked later on the call)', 'Dear Candidate, you have been shortlisted for a work from home job at Example Technologies. Reference: HRL. Call HR on 9876543210 to confirm your offer.'],
   ['suspicious', 'Parcel link', 'Your parcel could not be delivered. Update address: http://parcel-track.example.top/confirm'],
   ['suspicious', 'Free insurance review', 'You have been selected for a free insurance review. Details: www.insure-offer.example.in'],
+  ['suspicious', 'Fake police case notice (no money demand yet)', 'This is the police cybercrime department. A case has been registered against you.'],
+  ['suspicious', 'SIM linked to illegal activity', 'Your SIM is linked to illegal activity. TRAI will disconnect it. Press 1 to talk to the cyber police.'],
+  ['suspicious', 'Hindi CBI officer calling', 'सीबीआई अधिकारी बोल रहा हूँ। आपके खाते की जाँच हो रही है।'],
 
   // ---- SAFE ----
   ['safe', 'Bank debit alert', 'Example Bank: Rs 450.00 debited from A/c XX1234 at Metro Store via UPI. If not done by you, call the number on the back of your card.'],
@@ -38,6 +52,14 @@ const cases = [
   ['safe', 'Normal chat', 'Hi, are you coming for dinner tonight at 8?'],
   ['safe', 'Single word', 'hi'],
   ['safe', 'Genuine bank statement link', 'HDFC Bank: Your statement is ready. View at https://www.hdfcbank.com/statement'],
+  ['safe', 'Police verification certificate ready', 'Your police verification certificate is ready. Download it from the official portal.'],
+  ['safe', 'Friend asks to split a bill', 'Can you send the amount for the cab? I will return it tonight.'],
+  ['safe', 'Normal words ending in ed (updated notice)', 'We have updated notice period rules in your employee handbook. Please read them on the intranet.'],
+  ['safe', 'Hindi OTP with warning', 'आपका OTP 482913 है। इसे किसी को न बताएं। 10 मिनट तक मान्य।'],
+  ['safe', 'Do not tell anyone your PIN', 'Bank staff never ask for your PIN. Do not tell anyone your PIN or card number.'],
+  ['safe', 'Parcel out for delivery', 'Your FedEx parcel is out for delivery today. Track it in the app.'],
+  ['safe', 'Marathi OTP with warning', 'तुमचा OTP 482913 आहे. तो कोणालाही सांगू नका.'],
+  ['safe', 'Marathi normal appointment message', 'तुमची अपॉइंटमेंट उद्या सकाळी १० वाजता आहे.'],
 ];
 
 for (const [expected, name, text] of cases) {

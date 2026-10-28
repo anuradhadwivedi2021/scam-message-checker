@@ -53,7 +53,7 @@ If you open `index.html` directly without the server, the checker still works bu
 ```
 node --test
 ```
-47 automated tests, 47 passing: rule engine (scam, suspicious and safe messages, a Hindi message, a look-alike domain, an unsolicited job offer, edge cases, all built-in samples), the 5 recovery scenarios in 3 languages, detail extraction, and the API (validation, rate limit, body limit, security headers, quiz page).
+69 automated tests, 69 passing: rule engine (scam, suspicious and safe messages, a Hindi message, a look-alike domain, an unsolicited job offer, edge cases, all built-in samples), the 5 recovery scenarios in 3 languages, detail extraction, and the API (validation, rate limit, body limit, security headers, quiz page).
 
 The pages (checker, dashboard, Scam Library) and the new buttons were also tried by hand in the browser.
 

@@ -75,4 +75,4 @@ Open the AI section, paste your own Gemini API key, and press the AI button for 
 **Important:** ScamGuard AI is an awareness aid, not a guarantee. Rules can miss new scam styles, and a job scam that asks for money only on a later phone call may be marked only SUSPICIOUS. Always verify suspicious messages with your bank using the number on your card. For suspected financial cybercrime in India, call **1930**.
 
 ## Run the tests
-`node --test` runs 47 automated tests (rule engine, recovery steps in 3 languages, detail extraction, API security). All 47 pass.
+`node --test` runs 69 automated tests (rule engine, recovery steps in 3 languages, detail extraction, API security). All 69 pass.

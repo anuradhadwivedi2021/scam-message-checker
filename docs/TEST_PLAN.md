@@ -1,6 +1,6 @@
 # Test Plan
 
-Run everything with `node --test`. **47 automated tests, all passing.**
+Run everything with `node --test`. **69 automated tests, all passing.**
 
 | Area | File | What is checked |
 |---|---|---|

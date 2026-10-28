@@ -640,7 +640,7 @@ const SAMPLES = [
 ];
 
 const RULES = [
-  { id: "urgency", weight: 2, re: /immediately|urgent|within \d+ ?(hours?|hrs?|minutes?|mins?)|last chance|today only|expires? (today|soon)|turant|तुरंत|लगेच|तात्काळ/i },
+  { id: "urgency", weight: 2, re: /immediately|urgent|within \d+ ?(hours?|hrs?|minutes?|mins?)|last chance|today only|expires? (today|soon)|turant|तुरंत|लगेच|तात्काळ|त्वरित|ताबडतोब|तत्काल|फौरन|(do not|don't|dont) (tell|inform) anyone (about )?(this|the call|the case|the investigation)|keep (this|it) (confidential|secret)|stay on the video call|(do not|don't|dont) leave the (video )?call|वीडियो कॉल पर बने रहें|व्हिडिओ कॉलवर रहा/i },
   { id: "account", weight: 4, re: /(kyc|pan).{0,40}(update|expire|expired|pending|verify|verification)|(account|a\/c|card|sim|number).{0,40}(blocked|suspended|freez|deactivat|disconnect)|(electricity|power|connection|gas|bill).{0,40}(disconnect|cut|blocked|suspend)|band ho jayega|बंद हो|ब्लॉक/i },
   { id: "prize", weight: 3, re: /you have won|congratulations|(refund|cashback|reward|prize|lottery|lucky draw|jackpot|gift).{0,50}(claim|click|link|pending|selected)|claim.{0,30}(cashback|reward|prize|refund)|इनाम|लॉटरी|बक्षीस/i },
   { id: "secret", weight: 6, negatable: true, re: /(read|tell|say)( me| us)?( the| your)? code\b|(share|send|give|tell|enter|provide|reply with).{0,25}(otp|pin|cvv|password|card number)|(otp|pin|cvv|password).{0,25}(share|send|give|tell|enter|provide)/i },
@@ -648,10 +648,10 @@ const RULES = [
   { id: "shortLink", weight: 2, re: /\b(bit\.ly|tinyurl\.com|cutt\.ly|t\.co|rb\.gy|is\.gd)\/\S*/i },
   { id: "oddLink", weight: 2, re: /(https?:\/\/|www\.)[^\s\/]*-[^\s\/]*|[a-z0-9-]+\.(xyz|top|click|online|site|live|icu|buzz)\b/i },
   { id: "app", weight: 3, re: /(install|download).{0,30}(app|apk|anydesk|teamviewer|quicksupport)|\.apk\b|anydesk|teamviewer|quicksupport/i },
-  { id: "fee", weight: 2, re: /processing fee|registration fee|advance (payment|fee)|(pay|send|deposit|transfer).{0,30}(₹|rs\.?|inr)/i },
+  { id: "fee", weight: 2, re: /processing fee|registration fee|advance (payment|fee)|(pay|send|deposit|transfer).{0,30}(₹|rs\.?|inr)|(transfer|send|deposit)( the| your)? (money|amount|funds).{0,20}(\bnow\b|\bimmediately\b|\burgently\b|\btoday\b|to avoid)|(पैसे|रकम|रक्कम).{0,15}(ट्रांसफर|ट्रान्सफर|भेजें|भेजो|पाठवा|पाठव|जमा करें|जमा करा)|pay (the |a |your )?(fine|penalty)|safe account|(transfer|send|move).{0,15}(your )?(savings|funds|balance).{0,30}(rbi|safe|verification|secure)/i },
   { id: "job", weight: 4, re: /(earn|income).{0,30}(daily|per day|weekly)|work from home|part.?time job|join.{0,25}(whatsapp|telegram)|shortlisted|offer letter|(call|contact|whatsapp)\s+(our\s+)?(hr|recruiter)/i },
   { id: "qr", weight: 3, re: /scan.{0,25}qr|qr code.{0,25}(receive|refund|claim)|approve.{0,20}(request|payment)|collect request/i },
-  { id: "digitalArrest", weight: 5, re: /digital arrest|cbi|police arrest|ed notice|skype call|video call arrest|court warrant|गिरफ़्तार|अरेस्ट/i },
+  { id: "digitalArrest", weight: 5, re: /digital arrest|\bcbi\b|police arrest|\bed notice|skype call|video call arrest|court warrant|(case|fir|complaint|warrant).{0,25}(registered|filed|lodged|issued).{0,25}against you|avoid (your |an )?arrest|(do not|don't|dont|never) (disconnect|cut|end|hang up).{0,12}call|(cybercrime|cyber crime|crime branch|narcotics|customs) (department|branch|officer|police)|(you will be|you are being|you are going to be) arrested|arrest warrant|warrant.{0,25}(issued|in your name)|money laundering|narcotics control bureau|enforcement directorate|\b(ed|ncb|rbi|trai) officer|cyber (police|cell)|(parcel|package|courier).{0,50}(illegal|drugs|narcotics|contraband|seized)|(aadhaar|sim|number).{0,40}(linked|used|misused).{0,30}(illegal|money laundering|crime)|पार्सल.{0,40}(ड्रग|नशी|अवैध|अंमली)|ड्रग्ज|गिरफ़्तार|गिरफ्तार|अरेस्ट|अटक (टाळ|होईल|केली)|अटके(पासून|ची|चा|चे|ला|च्या)|गुन्ह्यात (वापर|सहभाग)|सीबीआई|सीबीआय|कॉल (डिस्कनेक्ट|कट|बंद) (न करें|करू नका)/i },
   { id: "generic", weight: 1, re: /dear (customer|user|sir|madam|account holder)|प्रिय ग्राहक/i }
 ];
 
